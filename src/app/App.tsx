@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/app.css";
-import { Route, Link, Switch } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import { HomePage } from "./screens/homePage";
 import { RecipeDetailsPage } from "./screens/recipeDetailsPage";
 import { BlogListPage } from "./screens/blogListPage";
@@ -8,36 +8,17 @@ import { BlogPostPage } from "./screens/blogPostPage";
 import { ContactPage } from "./screens/contactPage";
 import { UserPage } from "./screens/userPage";
 import { HelpPage } from "./screens/helpPage";
+import { Navbar } from "./components/header/Navbar";
+import { Footer } from "./components/footer";
+import { Inbox } from "./components/inbox";
 
 function App() {
-  return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/recipe-details">Recipe Details Page</Link>
-          </li>
-          <li>
-            <Link to="/blog-list">Blog List Page</Link>
-          </li>
-          <li>
-            <Link to="/blog-post">Blog Post Page</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact Page</Link>
-          </li>
-          <li>
-            <Link to="/user">User Page</Link>
-          </li>
-          <li>
-            <Link to="/help">Help Page</Link>
-          </li>
-        </ul>
-      </nav>
+  // const location = useLocation();
+  // console.log("location", location);
 
+  return (
+    <>
+      <Navbar />
       <Switch>
         <Route path="/recipe-details">
           <RecipeDetailsPage />
@@ -61,7 +42,9 @@ function App() {
           <HomePage />
         </Route>
       </Switch>
-    </div>
+      <Inbox />
+      <Footer />
+    </>
   );
 }
 
