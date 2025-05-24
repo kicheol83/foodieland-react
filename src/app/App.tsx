@@ -1,6 +1,5 @@
 import React from "react";
-import "../css/app.css";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { HomePage } from "./screens/homePage";
 import { RecipeDetailsPage } from "./screens/recipeDetailsPage";
 import { BlogListPage } from "./screens/blogListPage";
@@ -11,11 +10,11 @@ import { HelpPage } from "./screens/helpPage";
 import { Navbar } from "./components/header/Navbar";
 import { Footer } from "./components/footer";
 import { Inbox } from "./components/inbox";
+import "../css/app.css";
+import "../css/navbar.css";
+import "../css/home.css";
 
 function App() {
-  // const location = useLocation();
-  // console.log("location", location);
-
   return (
     <>
       <Navbar />

@@ -1,0 +1,188 @@
+.home-page {
+  position: relative;
+  width: 100%;
+  display: flex;
+  height: auto;
+  background: white;
+}
+
+.home-page .stk {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.home-page .box-item {
+  position: relative;
+  width: 620px;
+  height: 640px;
+  display: flex;
+  margin-top: 40px;
+  flex-direction: column;
+  z-index: 1;
+  background: rgb(231, 250, 254);
+}
+
+
+
+.home-page .box-item .hot-recipes {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 156px;
+  height: 45px;
+  border-radius: 30px;
+
+  background: rgb(255, 255, 255);
+}
+
+.home-page .box-item .hot-recipes p {
+  position: relative;
+  width: 79px;
+  height: 17px;
+  color: rgb(0, 0, 0);
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+  margin-left: 15px;
+}
+
+.home-page .box-item .tp-1 {
+  position: relative;
+  width: 520px;
+  height: 154px;
+  color: rgb(0, 0, 0);
+  font-family: "Inter";
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 77px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.home-page .box-item .tp-2 {
+  position: relative;
+  width: 520px;
+  height: 56px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.home-page .box-item .rectangle {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 40px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.home-page .box-item .rectangle-1 {
+  position: relative;
+  width: 120px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.home-page .box-item .men-icon {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  margin-left: 50px;
+}
+
+.home-page .box-item .men-title .typ-1 {
+  position: relative;
+  width: 86px;
+  height: 19px;
+  color: rgb(0, 0, 0);
+  font-family: "Inter";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.home-page .box-item .men-title .typ-2 {
+  position: relative;
+  width: 97px;
+  height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.home-page .box-item .view-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgb(0, 0, 0);
+}
+
+.home-page .box-item .view-button .view {
+  position: relative;
+  width: auto;
+  height: 17px;
+  color: rgb(255, 255, 255);
+  font-family: "Inter";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.home-page .box-img {
+  position: absolute;
+  width: 982px;
+  height: 640px;
+  margin-left: 272px;
+  margin-top: 39px;
+  z-index: 0;
+}
+
+.home-page .icon-ellipse {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  left: 544px;
+  top: 69px;
+  transform: rotate(180deg);
+  z-index: 2;
+}
+
+.home-page .icon-hand {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  left: 560px;
+  top: 83.85px;
+  transform: rotate(-30deg);
+  z-index: 2;
+}
