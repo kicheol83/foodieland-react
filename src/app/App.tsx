@@ -7,12 +7,14 @@ import { BlogPostPage } from "./screens/blogPostPage";
 import { ContactPage } from "./screens/contactPage";
 import { UserPage } from "./screens/userPage";
 import { HelpPage } from "./screens/helpPage";
-import { Navbar } from "./components/header/Navbar";
+import { Navbar } from "./components/header";
 import { Footer } from "./components/footer";
 import { Inbox } from "./components/inbox";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/home.css";
+import "../css/footer.css";
+import "../css/inbox.css";
 
 function App() {
   return (

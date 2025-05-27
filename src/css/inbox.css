@@ -1,0 +1,88 @@
+.inbox {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  background-color: white;
+}
+
+.inbox .inbox-box {
+  position: relative;
+  width: auto;
+  height: 442px;
+  border-radius: 60px;
+  background: rgb(231, 249, 253);
+  overflow: hidden;
+}
+
+.inbox .inbox-box .inbox-input {
+  position: relative;
+  width: 480px;
+  height: 80px;
+  border-radius: 24px;
+  background: rgb(255, 255, 255);
+}
+
+.inbox .inbox-box .input-inbox {
+  position: relative;
+  border-radius: 24px;
+  background: rgb(255, 255, 255);
+}
+
+.inbox .inbox-box .text-inb-h3 {
+  position: relative;
+  width: 589px;
+  height: 58px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.inbox .inbox-box .text-inb {
+  position: relative;
+  width: 620px;
+  height: 56px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.inbox .inbox-box .input-box {
+  position: relative;
+  border-radius: 24px;
+}
+
+.inbox .inbox-box .inbox-salad-img1 {
+  position: absolute;
+  pointer-events: none;
+  width: 400px;
+  left: -65px;
+  top: 122px;
+  transform: rotate(30deg);
+  z-index: 1;
+}
+
+.inbox .inbox-box .inbox-salad-img3 {
+  position: absolute;
+  pointer-events: none;
+  width: auto;
+  right: -110px;
+  top: 188px;
+  z-index: 1;
+}
+
+.inbox .inbox-box .inbox-salad-img2 {
+  width: 60px;
+  right: 170px;
+  top: 180px;
+  transform: rotate(-20deg);
+  z-index: 1;
+}

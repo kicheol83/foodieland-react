@@ -3,7 +3,7 @@ import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export function Navbar() {
-  const authMember = null;
+  const authMember = true;
   return (
     <div className="navbar">
       <Container sx={{ width: "auto", height: "38px" }}>
@@ -40,62 +40,51 @@ export function Navbar() {
               </NavLink>
             </Box>
             <Box className={"hover-line"}>
-              <NavLink
-                to="/recipe-details"
-                className={"link-text"}
-              >
+              <NavLink to="/recipe-details" className={"link-text"}>
                 Recipes
               </NavLink>
             </Box>
             <Box className={"hover-line"}>
-              <NavLink
-                to="/blog-list"
-                className={"link-text"}
-              >
+              <NavLink to="/blog-list" className={"link-text"}>
                 Blog
               </NavLink>
             </Box>
             {authMember ? (
               <Box className={"hover-line"}>
-                <NavLink
-                  to="/blog-post"
-                  className={"link-text"}
-                >
+                <NavLink to="/blog-post" className={"link-text"}>
                   Post
                 </NavLink>
               </Box>
             ) : null}
             {authMember ? (
               <Box className={"hover-line"}>
-                <NavLink
-                  to="/user"
-                  className={"link-text"}
-                >
+                <NavLink to="/user" className={"link-text"}>
                   User
                 </NavLink>
               </Box>
             ) : null}
-
             <Box className={"hover-line"}>
-              <NavLink
-                to="/contact"
-                className={"link-text"}
-              >
+              <NavLink to="/contact" className={"link-text"}>
                 Contact
               </NavLink>
             </Box>
             <Box className={"hover-line"}>
-              <NavLink
-                to="/help"
-                className={"link-text"}
-              >
+              <NavLink to="/help" className={"link-text"}>
                 Help
               </NavLink>
             </Box>
-
             {!authMember ? (
               <Box className={"hover-line"}>
-                <Button sx={{ background: "#3c7cf6", color: "white" }}>
+                <Button sx={{ background: "black", color: "white"  }}>
+                  Signup
+                </Button>
+              </Box>
+            ) : (
+              <img alt="" />
+            )}
+            {!authMember ? (
+              <Box className={"hover-line"}>
+                <Button sx={{ background: "#3c7cf6", color: "white", ml: "-60px"}}>
                   Login
                 </Button>
               </Box>
@@ -103,6 +92,7 @@ export function Navbar() {
               <img alt="" />
             )}
           </Stack>
+
           <Stack
             flexDirection={"row"}
             justifyContent={"space-between"}

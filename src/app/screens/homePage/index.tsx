@@ -1,7 +1,7 @@
 import {
+  Avatar,
   Box,
   Button,
-  colors,
   Container,
   Stack,
   Typography,
@@ -45,9 +45,9 @@ export function HomePage() {
             </Stack>
             <Stack flexDirection={"row"}>
               <Box className="men-icon" mt={"99px"}>
-                <img src="/icons/ellipse-men.svg" alt="" />
+                <Avatar alt="Remy Sharp" src="/icons/ellipse-men.svg" sx={{width: "60px", height: "60px"}} />
               </Box>
-              <Box className="men-title" mt={"104px"} ml={"16px"}>
+              <Box className="men-title" mt={"108px"} ml={"20px"}>
                 <Typography className="typ-1">John Smith</Typography>
                 <Typography className="typ-2" mt={"5px"}>15 March 2022</Typography>
               </Box>

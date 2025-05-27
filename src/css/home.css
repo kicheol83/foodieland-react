@@ -150,7 +150,7 @@
   width: auto;
   height: 17px;
   color: rgb(255, 255, 255);
-  font-family: "Inter";
+  font-family: var(--font);
   font-size: 14px;
   font-weight: 600;
   line-height: 17px;
