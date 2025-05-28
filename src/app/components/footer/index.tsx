@@ -7,7 +7,7 @@ export function Footer() {
       <Container>
         <Stack flexDirection={"column"} className="footer-box-bottom">
           <Box className="afisha">
-            <img src="/img/Foodieland1.png" alt="" />
+            <img src="/img/Foodieland1.webp" alt="" />
           </Box>
           <Box className="footer-text">
             Lorem ipsum dolor sit amet, consectetuipisicing elit

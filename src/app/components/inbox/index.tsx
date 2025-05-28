@@ -14,14 +14,14 @@ export function Inbox() {
           mb={"160px"}
         >
           <img className="inbox-salad-img1" src="/img/salad-fresh.png" alt="" />
-          <img className="inbox-salad-img2" src="/img/rucola.png" alt="" />
-          <img className="inbox-salad-img3" src="/img/plate.png" alt="" />
+          <img className="inbox-salad-img2" src="/img/rucola.webp" alt="" />
+          <img className="inbox-salad-img3" src="/img/plate.webp" alt="" />
           <Typography className="text-inb-h3">
             Deliciousness to your inbox
           </Typography>
           <Typography className="text-inb" mt={"24px"}>
             Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqut enim ad minim{" "}
+            tempor incididunt ut labore et dolore magna aliqut enim ad minim
           </Typography>
           <Box
             className="input-box"
@@ -41,7 +41,8 @@ export function Inbox() {
                 border: "1px solid #ccc",
                 borderRadius: "8px",
                 overflow: "hidden",
-                boxShadow: 1,
+                outline: "none",
+                boxShadow: "none",
               }}
             >
               <TextField

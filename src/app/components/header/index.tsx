@@ -17,7 +17,7 @@ export function Navbar() {
             <NavLink to="/">
               <img
                 style={{ width: "110px", height: "30px" }}
-                src="/img/Foodieland1.png"
+                src="/img/Foodieland1.webp"
                 alt=""
               />
             </NavLink>
