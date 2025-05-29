@@ -140,12 +140,6 @@ export default function Simple() {
               <Box className="no-data">Popular products are not available</Box>
             )}
           </Stack>
-          <Stack
-            flexDirection={"row"}
-            justifyContent={"space-between"}
-            flexWrap={"wrap"}
-            className="box1"
-          ></Stack>
         </Stack>
       </Container>
     </div>

@@ -401,18 +401,6 @@
   text-align: left;
 }
 
-.simple-frame .simple-box .recipe-box .rectan1 {
-  position: relative;
-  width: auto;
-  height: 24px;
-}
-
-.simple-frame .simple-box .recipe-box .rectan2 {
-  position: relative;
-  width: auto;
-  height: 24px;
-}
-
 /** LEAN MORE **/
 .lean-more-frame {
   position: relative;
@@ -519,6 +507,182 @@
   position: absolute;
   width: 50px;
   height: 50px;
-  left: 125px;
+  left: 630px;
   margin-top: 480px;
+}
+
+/** CHECK INSTAGRAM **/
+.check-instagram-frame {
+  margin-top: 240px;
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: linear-gradient(
+    180deg,
+    rgba(231, 249, 253, 0),
+    rgb(231, 249, 253) 100%
+  );
+}
+
+.check-instagram-frame .check-inst-box {
+  position: relative;
+  width: auto;
+  height: 964px;
+  display: flex;
+}
+
+.check-instagram-frame .check-inst-box .check-inst-title {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.check-instagram-frame .check-inst-box .check-inst-title .inst-text1 {
+  position: relative;
+  width: 796px;
+  height: 58px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58px;
+  letter-spacing: -4%;
+  text-align: center;
+}
+
+.check-instagram-frame .check-inst-box .check-inst-title .inst-text2 {
+  margin-top: 24px;
+  position: relative;
+  width: 840px;
+  height: 56px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.check-instagram-frame .check-inst-box .insta-boxs {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.check-instagram-frame .check-inst-box .insta-boxs .inst-card {
+  position: relative;
+  width: 290px;
+  height: 445px;
+}
+
+.check-instagram-frame .check-inst-box .visit-button {
+  position: relative;
+  margin-left: 483px;
+  margin-top: 81px;
+  width: 229px;
+  height: 60px;
+  border-radius: 16px;
+  background: rgb(0, 0, 0);
+}
+
+/** DELICIOUS RECIPE **/
+.delicious-recipe-frame {
+  position: relative;
+  margin-top: 160px;
+  width: auto;
+  height: auto;
+  display: flex;
+  background: white;
+}
+
+.delicious-recipe-frame .del-box .del-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.delicious-recipe-frame .del-box .del-title .del-text1 {
+  position: relative;
+  width: 507px;
+  height: 116px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 58px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.delicious-recipe-frame .del-box .del-title .del-text2 {
+  position: relative;
+  margin-top: 30px;
+  width: 620px;
+  height: 56px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+.delicious-recipe-frame .recipe-box {
+  position: relative;
+
+  width: 290px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+}
+
+.delicious-recipe-frame .recipe-box .recipe-img {
+  position: relative;
+  width: 290px;
+  height: 200.2px;
+  border-radius: 20px;
+}
+
+.delicious-recipe-frame .recipe-box .recipe-name {
+  position: relative;
+  margin-top: 15px;
+  width: 290px;
+  height: 52px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.delicious-recipe-frame .recipe-box .ellipse-white {
+  position: absolute;
+  margin-left: 235px;
+  margin-top: 10px;
+  width: 48px;
+  height: 48px;
+  z-index: 2;
+}
+
+.delicious-recipe-frame .recipe-box .heart {
+  position: absolute;
+  margin-left: 244px;
+  margin-top: 16px;
+  width: 30.25px;
+  height: 40px;
+  z-index: 3;
 }
