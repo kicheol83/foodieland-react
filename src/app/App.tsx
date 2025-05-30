@@ -15,6 +15,7 @@ import "../css/navbar.css";
 import "../css/home.css";
 import "../css/footer.css";
 import "../css/inbox.css";
+import "../css/recipe.css";
 
 function App() {
   return (

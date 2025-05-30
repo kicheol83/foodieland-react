@@ -1,0 +1,462 @@
+.recipe-details-frame {
+  position: relative;
+  width: auto;
+  height: auto;
+  background: white;
+}
+
+.recipe-details-frame .health-rice-frame {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: flex;
+  background: white;
+}
+
+.recipe-details-frame .health-rice-frame .health-box {
+  position: relative;
+  width: auto;
+  height: 1003px;
+  display: flex;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .rice-box .health-title {
+  position: relative;
+  margin-top: 80px;
+  width: 777px;
+  height: 77px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 64px;
+  font-weight: 600;
+  line-height: 77px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .typ-1 {
+  position: relative;
+  width: 86px;
+  height: 19px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .typ-2 {
+  position: relative;
+  width: 97px;
+  height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .line {
+  position: relative;
+  margin-top: 25px;
+  margin-left: 58px;
+  width: 50px;
+  height: 0;
+  transform: rotate(90deg);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.recipe-details-frame .health-rice-frame .health-box .creator {
+  position: relative;
+  width: auto;
+  height: 50px;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .video-box {
+  position: relative;
+  margin-top: 54px;
+  width: 915.21px;
+  height: 623px;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .text1 {
+  position: relative;
+  width: 73px;
+  height: 15px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 10%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .minutes {
+  margin-top: 10px;
+  position: relative;
+  width: auto;
+  height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .chicken-text {
+  position: relative;
+  width: 53px;
+  height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .health-box .information-frame {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+}
+
+.recipe-details-frame .health-rice-frame .information-frame .print-icon {
+  position: absolute;
+  margin-left: 27px;
+  margin-top: 26px;
+}
+
+.recipe-details-frame .health-rice-frame .information-frame .print-img {
+  position: relative;
+  margin-left: 20px;
+}
+
+.recipe-details-frame .health-rice-frame .information-frame .share {
+  position: absolute;
+  margin-left: 10px;
+  margin-left: 45px;
+  margin-top: 26px;
+  z-index: 1;
+}
+
+.recipe-details-frame .health-rice-frame .information-frame .print-text {
+  position: relative;
+  margin-top: 8px;
+  margin-left: -31px;
+  width: 41px;
+  height: 15px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 10%;
+  text-align: center;
+}
+
+.recipe-details-frame .health-rice-frame .information-frame .share-text {
+  position: relative;
+  margin-top: 8px;
+
+  margin-left: 60px;
+  width: 45px;
+  height: 15px;
+  color: rgb(0, 0, 0);
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 10%;
+  text-align: center;
+}
+
+.recipe-details-frame .health-rice-frame .info {
+  position: relative;
+  margin-left: -180px;
+  width: 400px;
+  height: 600px;
+  border-radius: 30px;
+  background: rgb(231, 250, 254);
+}
+
+.recipe-details-frame .health-rice-frame .info .nut {
+  position: relative;
+  width: auto;
+  height: 29px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .info .name {
+  position: relative;
+  width: 66px;
+  height: 22px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.recipe-details-frame .health-rice-frame .info .kgm {
+  position: relative;
+  margin-right: 35px;
+  width: 80px;
+  height: 22px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: -4%;
+  text-align: right;
+}
+
+.recipe-details-frame .health-rice-frame .bot-line {
+  position: relative;
+  width: 336px;
+  height: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-left: 32px;
+  margin-top: 16px;
+}
+
+.recipe-details-frame .health-rice-frame .bottom-title {
+  position: relative;
+  width: 336px;
+  height: 56px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.recipe-details-frame .health-rice-frame .text-bott {
+  position: relative;
+  width: auto;
+  height: 85px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-align: left;
+}
+
+/** INGREDIENTS **/
+
+.recipe-details-frame .ingredients-frame {
+  position: relative;
+  width: auto;
+  height: auto;
+  display: flex;
+  background: white;
+}
+
+.ingredients-frame .ing-frame {
+  position: relative;
+  width: auto;
+  height: auto;
+  background: white;
+}
+
+.ingredients-frame .ing-frame .ing-box1 {
+  position: relative;
+  width: 840px;
+  height: auto;
+  margin-top: 80px;
+}
+
+.ingredients-frame .ing-frame .ing-box1 .ing-title {
+  position: relative;
+  width: auto;
+  height: 44px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.ingredients-frame .ing-frame .ing-box1 .dish-text {
+  position: relative;
+  margin-top: 92px;
+  width: auto;
+  height: 29px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.ingredients-frame .ing-frame .ing-box1 .checkbox {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.ingredients-frame .ing-frame .ing-box1 .checkbox .check-box1 {
+  position: relative;
+  margin-top: 32px;
+  width: 30px;
+  height: 30px;
+}
+
+.ingredients-frame .ing-frame .ing-box1 .checkbox .check-text {
+  position: relative;
+  margin-top: 35px;
+  width: auto;
+  height: 22px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.ingredients-frame .ing-frame .bott-line {
+  position: relative;
+  width: 750px;
+  height: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ingredients-frame .recipe {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.ingredients-frame .recipe .recipe-box {
+  position: relative;
+  margin-top: 37px;
+  width: 400px;
+  height: auto;
+}
+
+.ingredients-frame .recipe .recipe-box .recipe-text {
+  position: relative;
+  width: auto;
+  height: 39px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 39px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.ingredients-frame .recipe .recipe-box .recipes {
+  position: relative;
+  margin-top: 20px;
+  display: flex;
+}
+
+.ingredients-frame .recipe .recipe-box .recipes .img {
+  position: relative;
+  width: 180px;
+  height: 120.72px;
+  border-radius: 30px;
+}
+
+.ingredients-frame .recipe .recipe-box .recipe-text {
+  position: relative;
+  margin-top: 40px;
+}
+
+.ingredients-frame .recipe .recipe-box .recipe-text .big {
+  position: relative;
+  margin-top: -19px;
+  width: 196px;
+  height: 56px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.ingredients-frame .recipe .recipe-box .recipe-text .small {
+  position: relative;
+  margin-top: 10px;
+  width: 113px;
+  height: 17px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.ingredients-frame .icon-foto {
+  position: relative;
+  margin-top: -365px;
+}
+
+.ingredients-frame .recipe .green {
+  position: absolute;
+  margin-top: 380px;
+  width: 400px;
+  height: 434px;
+}
+
+.ingredients-frame .dont {
+  position: absolute;
+  margin-top: 400px;
+  margin-left: 121px;
+  width: 172px;
+  height: 60px;
+}
+
+.ingredients-frame .star {
+  position: absolute;
+  width: 680px;
+  height: 710px;
+  margin-top: 260px;
+  margin-left: -144px;
+}
+
+.ingredients-frame .www {
+  position: absolute;
+  margin-left: 133px;
+  margin-top: 780px;
+}
+
+.ingredients-frame .one {
+  position: absolute;
+  margin-top: 474px;
+  margin-left: 30px;
+}
