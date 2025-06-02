@@ -4,7 +4,7 @@ import Ingredients from "./Ingredients";
 import Directions from "./Directions";
 import LikeRecipe from "./LikeRecipe";
 
-export function RecipeDetailsPage() {
+export default function RecipeDetailsPage() {
   return (
     <div className="recipe-details-frame">
       <HealthRice />

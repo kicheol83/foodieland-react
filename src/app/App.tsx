@@ -1,21 +1,22 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import { HomePage } from "./screens/homePage";
-import { RecipeDetailsPage } from "./screens/recipeDetailsPage";
-import { BlogListPage } from "./screens/blogListPage";
-import { BlogPostPage } from "./screens/blogPostPage";
-import { ContactPage } from "./screens/contactPage";
-import { UserPage } from "./screens/userPage";
-import { HelpPage } from "./screens/helpPage";
-import { Navbar } from "./components/header";
-import { Footer } from "./components/footer";
-import { Inbox } from "./components/inbox";
+import HomePage from "./screens/homePage";
+import RecipeDetailsPage from "./screens/recipeDetailsPage";
+import BlogPage from "./screens/blogListPage";
+import UserPage from "./screens/userPage";
+import Navbar from "./components/header";
+import Footer from "./components/footer";
+import HelpPage from "./screens/helpPage";
+import Inbox from "./components/inbox";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/home.css";
 import "../css/footer.css";
 import "../css/inbox.css";
 import "../css/recipe.css";
+import "../css/blog.css";
+import "../css/help.css";
+import "../css/userPage.css";
 
 function App() {
   return (
@@ -25,14 +26,8 @@ function App() {
         <Route path="/recipe-details">
           <RecipeDetailsPage />
         </Route>
-        <Route path="/blog-list">
-          <BlogListPage />
-        </Route>
-        <Route path="/blog-post">
-          <BlogPostPage />
-        </Route>
-        <Route path="/contact">
-          <ContactPage />
+        <Route path="/blog-page">
+          <BlogPage />
         </Route>
         <Route path="/user">
           <UserPage />

@@ -460,3 +460,139 @@
   margin-top: 474px;
   margin-left: 30px;
 }
+
+/** DIRECTIONS **/
+.recipe-details-frame .directions-frame {
+  position: relative;
+  margin-top: 150px;
+  width: auto;
+  height: auto;
+  background: white;
+}
+
+.recipe-details-frame .directions-frame .directions-box {
+  position: relative;
+  width: 900px;
+  height: auto;
+  background: white;
+}
+
+.directions-frame .directions-box .directions-text {
+  position: relative;
+  width: 165px;
+  height: 44px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.directions-frame .directions-box .directions-font {
+  position: relative;
+  width: auto;
+  height: 29px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 29px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+.directions-frame .directions-box .check.txt {
+  position: relative;
+  width: 792px;
+  height: 104px;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -2%;
+  text-align: left;
+}
+
+/** LIKE RECIPE **/
+.recipe-details-frame .like-recipe-frame {
+  position: relative;
+  margin-top: 160px;
+  width: auto;
+  height: auto;
+  background: white;
+}
+
+.recipe-details-frame .like-recipe-frame .like-recipe-box {
+  position: relative;
+  width: auto;
+  height: auto;
+}
+
+.like-recipe-frame .like-recipe-box .like-recipe-title {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 44px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.like-recipe-frame .recipe-box {
+  position: relative;
+
+  width: 290px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+}
+
+.like-recipe-frame .recipe-box .recipe-img {
+  position: relative;
+  width: 290px;
+  height: 200.2px;
+  border-radius: 20px;
+}
+
+.like-recipe-frame .recipe-box .recipe-name {
+  position: relative;
+  margin-top: 15px;
+  width: 290px;
+  height: 52px;
+  color: rgb(0, 0, 0);
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -4%;
+  text-align: left;
+}
+
+.like-recipe-frame .recipe-box .ellipse-white {
+  position: absolute;
+  margin-left: 235px;
+  margin-top: 10px;
+  width: 48px;
+  height: 48px;
+  z-index: 2;
+}
+
+.like-recipe-frame .recipe-box .heart {
+  position: absolute;
+  margin-left: 244px;
+  margin-top: 16px;
+  width: 30.25px;
+  height: 40px;
+  z-index: 3;
+}

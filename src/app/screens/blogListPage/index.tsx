@@ -1,5 +1,19 @@
-import { Container } from "@mui/material";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
+import BlogPostPage from "./BlogPostPage";
+import BlogListPage from "./BlogListPage";
 
-export function BlogListPage() {
-  return <Container>Blog List Page</Container>;
+export default function BlogPage() {
+  const blog = useRouteMatch();
+  return (
+    <div className="blog-page">
+      <Switch>
+        <Route path={`${blog.path}/:blogId`}>
+          <BlogPostPage />
+        </Route>
+        <Route path={`${blog.path}`}>
+          <BlogListPage />
+        </Route>
+      </Switch>
+    </div>
+  );
 }

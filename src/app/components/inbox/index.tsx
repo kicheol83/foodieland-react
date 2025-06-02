@@ -1,7 +1,7 @@
 import { Box, Button, Container, Stack, TextField } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
-export function Inbox() {
+export default function Inbox() {
   return (
     <div className="inbox">
       <Container>

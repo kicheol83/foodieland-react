@@ -1,7 +1,7 @@
 import { Box, Container, Stack } from "@mui/material";
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 
-export function Footer() {
+export default function Footer() {
   return (
     <div className="footer">
       <Container>

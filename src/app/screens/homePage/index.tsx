@@ -7,7 +7,7 @@ import LeanMore from "./LeanMore";
 import Process from "./Process";
 import Simple from "./Simple";
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <div className="home-page">
       <Container>
