@@ -1,9 +1,10 @@
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import GoogleLoginButton from "../GoogleLoginButton";
 
 export default function Navbar() {
-  const authMember = null;
+  const authMember = false;
   return (
     <div className="navbar">
       <Container sx={{ width: "auto", height: "38px" }}>
@@ -62,11 +63,17 @@ export default function Navbar() {
               </NavLink>
             </Box>
             {!authMember ? (
-              <Box className={"hover-line"}>
-                <Button sx={{ background: "black", color: "white" }}>
-                  Signup
-                </Button>
-              </Box>
+              <>
+                <Box className={"hover-line"}>
+                  <Button sx={{ background: "black", color: "white" }}>
+                    Signup
+                  </Button>
+                </Box>
+
+                <Box className={"hover-line"} sx={{ ml: 2 }}>
+                  <GoogleLoginButton />
+                </Box>
+              </>
             ) : (
               <img alt="" />
             )}
@@ -80,6 +87,9 @@ export default function Navbar() {
                 </Button>
               </Box>
             ) : (
+              // <Box className={"hover-line"}>
+              //   <GoogleLoginButton />
+              // </Box>
               <img alt="" />
             )}
           </Stack>
