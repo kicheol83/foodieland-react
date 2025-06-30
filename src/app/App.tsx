@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import RecipeDetailsPage from "./screens/recipeDetailsPage";
@@ -18,10 +18,11 @@ import "../css/blog.css";
 import "../css/help.css";
 import "../css/userPage.css";
 
-
-
-
 function App() {
+  useEffect(() => {
+    
+  }, []);
+
   return (
     <>
       <Navbar />
