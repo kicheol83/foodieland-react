@@ -2,9 +2,11 @@ import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import { Box, Button, Container, Stack } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import GoogleLoginButton from "../GoogleLoginButton";
+import { useState } from "react";
 
 export default function Navbar() {
-  const authMember = false;
+  const authMember = true;
+  const [count, setCount] = useState(0);
   return (
     <div className="navbar">
       <Container sx={{ width: "auto", height: "38px" }}>
@@ -82,6 +84,7 @@ export default function Navbar() {
               <Box className={"hover-line"}>
                 <Button
                   sx={{ background: "#3c7cf6", color: "white", ml: "-60px" }}
+                  onClick={() => setCount(count + 1)}
                 >
                   Login
                 </Button>
