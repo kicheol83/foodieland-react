@@ -24,7 +24,6 @@ export default function Simple() {
 
   const { recipeTasty } = useSelector(recipeTastyRetrieve);
 
-  console.log("simple", recipeTasty);
 
   const recipeHandlers = () => {
     history.push("/recipe-details");

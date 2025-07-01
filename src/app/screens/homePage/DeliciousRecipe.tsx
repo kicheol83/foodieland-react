@@ -1,74 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import { useHistory } from "react-router-dom";
 
-const list = [
-  {
-    name: "Big and Juicy Wagyu Beef Cheeseburger",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/hot-dog.webp",
-  },
-  {
-    name: "Fresh Lime Roasted Salmon with Ginger Sauce",
-    minut: "30 minutes",
-    type: "Noodles",
-    imgPath: "/img/pasta.webp",
-  },
-  {
-    name: "Strawberry Oatmeal Pancake with Honey Syrup",
-    minut: "30 minutes",
-    type: "Fresh",
-    imgPath: "/img/fresh.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/rice.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sweets",
-    imgPath: "/img/chees.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Fish",
-    imgPath: "/img/baliq.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sweets",
-    imgPath: "/img/honey.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/pasta.webp",
-  },
-];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveRecipeDelicious } from "./selector";
+import { Recipe } from "../../../libs/types/recipe";
+import { serverApi } from "../../../libs/config";
+import LikeService from "../../services/LikeService";
+
+/** REDUX SLICE & SELECTOR **/
+
+const recipeDeliciousRetrieve = createSelector(
+  retrieveRecipeDelicious,
+  (recipeDelicious) => ({ recipeDelicious })
+);
 
 export default function DeliciousRecipe() {
+  const likeService = new LikeService();
   const history = useHistory();
 
   const recipeHandler = () => {
     history.push("/recipe-details");
   };
 
-  const [likedIndex, setLikedIndex] = useState<number[]>([]);
-  const toggleLiked = (index: number) => {
-    setLikedIndex((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const [likedIndex, setLikedIndex] = useState<string[]>([]);
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem("likedIndex") || "[]");
+    setLikedIndex(savedLikes);
+  }, []);
+
+  const toggleLiked = async (id: string) => {
+    try {
+      await likeService.toggleRecipeLike(id);
+
+      setLikedIndex((prev) => {
+        const updated = prev.includes(id)
+          ? prev.filter((i) => i !== id)
+          : [...prev, id];
+
+        localStorage.setItem("likedIndex", JSON.stringify(updated));
+
+        return updated;
+      });
+    } catch (err) {
+      console.error("Toggle like error:", err);
+    }
   };
+
+  const { recipeDelicious } = useSelector(recipeDeliciousRetrieve);
 
   return (
     <div className="delicious-recipe-frame">
@@ -95,12 +78,13 @@ export default function DeliciousRecipe() {
             justifyContent={"space-between"}
             flexWrap={"wrap"}
           >
-            {list.length !== 0 ? (
-              list.map((ele, index) => {
+            {recipeDelicious.length !== 0 ? (
+              recipeDelicious.map((ele: Recipe) => {
+                const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
                 return (
                   <Stack
                     className="recipe-box"
-                    key={index}
+                    key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
                     onClick={recipeHandler}
@@ -113,29 +97,31 @@ export default function DeliciousRecipe() {
                     <img
                       className="heart"
                       src={
-                        likedIndex.includes(index)
+                        likedIndex.includes(ele._id)
                           ? "/icons/heart-red.svg"
                           : "/icons/heart-white.svg"
                       }
                       alt=""
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleLiked(index);
+                        toggleLiked(ele._id);
                       }}
                     />
-                    <img className="recipe-img" src={ele.imgPath} alt="" />
+                    <img className="recipe-img" src={imagePath} alt="" />
                     <Typography
                       className={"recipe-name"}
                       mt={"27px"}
                       ml={"3px"}
                     >
-                      {ele.name}
+                      {ele.recipeName}
                     </Typography>
                     <Stack flexDirection={"row"} ml={"3px"} mt={"20px"}>
                       <AccessTimeOutlinedIcon />
-                      <Typography ml={"11px"}>{ele.minut}</Typography>
+                      <Typography ml={"11px"}>
+                        {ele.recipePrepTime} minutes
+                      </Typography>
                       <FlatwareOutlinedIcon sx={{ ml: "30px" }} />
-                      <Typography ml={"11px"}>{ele.type}</Typography>
+                      <Typography ml={"11px"}>{ele.recipeType}</Typography>
                     </Stack>
                   </Stack>
                 );

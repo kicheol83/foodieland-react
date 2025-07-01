@@ -10,7 +10,7 @@ import Simple from "./Simple";
 
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setRecipeTasty } from "./slice";
+import { setRecipeDelicious, setRecipeTasty } from "./slice";
 import { Recipe } from "../../../libs/types/recipe";
 import RecipeService from "../../services/RecipeService";
 import { RecipeCategories } from "../../../libs/enums/categories.enum";
@@ -18,10 +18,13 @@ import { RecipeCategories } from "../../../libs/enums/categories.enum";
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
   setRecipeTasty: (data: Recipe[]) => dispatch(setRecipeTasty(data)),
+  setRecipeDelicious: (data: Recipe[]) => dispatch(setRecipeDelicious(data)),
 });
 
 export default function HomePage() {
   const { setRecipeTasty } = actionDispatch(useDispatch());
+  const { setRecipeDelicious } = actionDispatch(useDispatch());
+  
 
   useEffect(() => {
     const recipe = new RecipeService();
@@ -34,6 +37,18 @@ export default function HomePage() {
       })
       .then((data) => {
         setRecipeTasty(data);
+      })
+      .catch((err) => console.log(err));
+
+    recipe
+      .getRecipes({
+        page: 1,
+        limit: 8,
+        recipe: "recipeLike",
+        recipeType: RecipeCategories.BREAKFAST,
+      })
+      .then((data) => {
+        setRecipeDelicious(data);
       })
       .catch((err) => console.log(err));
   }, []);
