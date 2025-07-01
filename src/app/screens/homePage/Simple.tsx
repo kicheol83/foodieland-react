@@ -6,74 +6,25 @@ import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useHistory } from "react-router-dom";
 
-const list = [
-  {
-    name: "Big and Juicy Wagyu Beef Cheeseburger",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/hot-dog.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh Lime Roasted Salmon with Ginger Sauce",
-    minut: "30 minutes",
-    type: "Noodles",
-    imgPath: "/img/pasta.webp",
-    view: 1,
-  },
-  {
-    name: "Strawberry Oatmeal Pancake with Honey Syrup",
-    minut: "30 minutes",
-    type: "Fresh",
-    imgPath: "/img/fresh.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/rice.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sweets",
-    imgPath: "/img/chees.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Fish",
-    imgPath: "/img/baliq.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sweets",
-    imgPath: "/img/honey.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/pasta.webp",
-    view: 1,
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Fish",
-    imgPath: "/img/baliq.webp",
-    view: 1,
-  },
-];
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveRecipeTasty } from "./selector";
+import { Recipe } from "../../../libs/types/recipe";
+import { serverApi } from "../../../libs/config";
+
+/** REDUX SLICE & SELECTOR **/
+
+const recipeTastyRetrieve = createSelector(
+  retrieveRecipeTasty,
+  (recipeTasty) => ({ recipeTasty })
+);
 
 export default function Simple() {
   const history = useHistory();
+
+  const { recipeTasty } = useSelector(recipeTastyRetrieve);
+
+  console.log("simple", recipeTasty);
 
   const recipeHandlers = () => {
     history.push("/recipe-details");
@@ -102,35 +53,38 @@ export default function Simple() {
             flexWrap={"wrap"}
             justifyContent={"space-between"}
           >
-            {list.length !== 0 ? (
-              list.map((ele, index) => {
+            {recipeTasty.length !== 0 ? (
+              recipeTasty.map((ele: Recipe) => {
+                const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
                 return (
                   <Stack
                     className="recipe-box"
-                    key={index}
+                    key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
                     onClick={recipeHandlers}
                   >
-                    <img className="recipe-img" src={ele.imgPath} alt="" />
+                    <img className="recipe-img" src={imagePath} alt="" />
                     <Typography
                       className={"recipe-name"}
                       mt={"27px"}
                       ml={"24px"}
                     >
-                      {ele.name}
+                      {ele.recipeName}
                     </Typography>
                     <Stack flexDirection={"row"} ml={"20px"} mt={"20px"}>
                       <AccessTimeOutlinedIcon />
-                      <Typography ml={"11px"}>{ele.minut}</Typography>
+                      <Typography ml={"11px"}>
+                        {ele.recipePrepTime} minutes
+                      </Typography>
                       <FlatwareOutlinedIcon sx={{ ml: "30px" }} />
-                      <Typography ml={"11px"}>{ele.type}</Typography>
+                      <Typography ml={"11px"}>{ele.recipeType}</Typography>
                       <RemoveRedEyeIcon
                         sx={{ ml: "30px" }}
                         className="view-icon"
                       />
                       <p style={{ marginTop: "1px", marginLeft: "5px" }}>
-                        {ele.view}
+                        {ele.recipeView}
                       </p>
                     </Stack>
                   </Stack>

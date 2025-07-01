@@ -1,4 +1,4 @@
-import { Categories } from "../enums/categories.enum";
+import { RecipeCategories } from "../enums/categories.enum";
 import { CookTime, PrepTime } from "../enums/recipe.enum";
 import { Author } from "./author";
 
@@ -20,7 +20,7 @@ export interface Recipe {
   recipeName: string;
   recipePrepTime: PrepTime;
   recipeCookTime: CookTime;
-  recipeType: Categories;
+  recipeType: RecipeCategories;
   recipeImage: string[];
   recipeNutrition: Nutrition;
   recipeIngredients: Ingredient[];
@@ -40,7 +40,7 @@ export interface RecipeInput {
   recipeName: string;
   recipePrepTime: PrepTime;
   recipeCookTime: CookTime;
-  recipeType: Categories;
+  recipeType: RecipeCategories;
   authorId: string;
   recipeImage: string[]; // Fayl yuklansa: req.files orqali
   recipeNutrition: {
@@ -64,7 +64,7 @@ export interface RecipeUpdate {
   recipeName?: string;
   recipePrepTime?: PrepTime;
   recipeCookTime?: CookTime;
-  recipeType?: Categories;
+  recipeType?: RecipeCategories;
   recipeImage?: string[]; // Fayl yuklansa: req.files orqali
   recipeNutrition?: {
     calories?: string;
@@ -85,6 +85,6 @@ export interface RecipeInquiry {
   recipe: string;
   page: number;
   limit: number;
-  recipeType?: Categories;
+  recipeType?: RecipeCategories;
   search?: string;
 }

@@ -8,27 +8,35 @@ import LeanMore from "./LeanMore";
 import Process from "./Process";
 import Simple from "./Simple";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-import { setRecipeCategories } from "./slice";
-import { retrieveRecipeCategories } from "./selector";
+import { setRecipeTasty } from "./slice";
 import { Recipe } from "../../../libs/types/recipe";
+import RecipeService from "../../services/RecipeService";
+import { RecipeCategories } from "../../../libs/enums/categories.enum";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({
-  setRecipeCategories: (data: Recipe[]) => dispatch(setRecipeCategories(data)),
+  setRecipeTasty: (data: Recipe[]) => dispatch(setRecipeTasty(data)),
 });
-const recipeCategoriesRetrieve = createSelector(
-  retrieveRecipeCategories,
-  (recipeCategories) => ({ recipeCategories })
-);
 
 export default function HomePage() {
-  const { setRecipeCategories } = actionDispatch(useDispatch());
-  const { recipeCategories } = useSelector(recipeCategoriesRetrieve);
+  const { setRecipeTasty } = actionDispatch(useDispatch());
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const recipe = new RecipeService();
+    recipe
+      .getRecipes({
+        page: 1,
+        limit: 9,
+        recipe: "createdAt",
+        recipeType: RecipeCategories.BREAKFAST,
+      })
+      .then((data) => {
+        setRecipeTasty(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="home-page">
