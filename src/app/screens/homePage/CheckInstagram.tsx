@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Container, Stack } from "@mui/material";
+import dayjs from "dayjs";
 import { Instagram } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import { CssVarsProvider } from "@mui/joy";
@@ -19,37 +20,23 @@ import SendOutlined from "@mui/icons-material/SendOutlined";
 import Face from "@mui/icons-material/Face";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
 
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveRecipeInstagram } from "./selector";
+import { Recipe } from "../../../libs/types/recipe";
+import { serverApi } from "../../../libs/config";
+import LikeService from "../../services/LikeService";
+
+/** REDUX SLICE & SELECTOR **/
+
+const recipeInstagramRetrieve = createSelector(
+  retrieveRecipeInstagram,
+  (recipeInstagram) => ({ recipeInstagram })
+);
+
 export default function CheckInstagram() {
-  const instaCard = [
-    {
-      name: "Foodieland",
-      icon: "/img/ramen.webp",
-      img: "/img/salad-card.png",
-      desc: "Foodieland. The vegetables dishes need to have",
-      likes: 5,
-    },
-     {
-      name: "Foodieland",
-      icon: "/img/ramen.webp",
-      img: "/img/dessert-card.png",
-      desc: "Foodieland. The vegetables dishes need to have",
-      likes: 100,
-    },
-     {
-      name: "Foodieland",
-      icon: "/img/ramen.webp",
-      img: "/img/onion-card.png",
-      desc: "Foodieland. The vegetables dishes need to have",
-      likes: 500,
-    },
-     {
-      name: "Foodieland",
-      icon: "/img/ramen.webp",
-      img: "/img/dish-card.png",
-      desc: "Foodieland. The vegetables dishes need to have",
-      likes: 888,
-    },
-  ];
+  const { recipeInstagram } = useSelector(recipeInstagramRetrieve);
+
   return (
     <div className="check-instagram-frame">
       <Container>
@@ -60,7 +47,7 @@ export default function CheckInstagram() {
         >
           <Box className="check-inst-title">
             <Typography className="inst-text1">
-              Check out @foodieland on Instagram
+              Check out @foodieland_official on Instagram
             </Typography>
             <Typography className="inst-text2">
               Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
@@ -69,22 +56,25 @@ export default function CheckInstagram() {
             </Typography>
           </Box>
           <Box className="insta-boxs" mt={"80px"}>
-            {instaCard.length !== 0 ? (
-              instaCard.map((ele, index) => {
+            {recipeInstagram.length !== 0 ? (
+              recipeInstagram.map((ele: Recipe) => {
+                const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
+
                 return (
-                  <CssVarsProvider key={index}>
-                    <Card
+                  <CssVarsProvider key={ele._id}>
+                    <Card 
                       className="inst-card"
                       variant="outlined"
                       sx={{
                         "--Card-radius": (theme) => theme.vars.radius.xs,
                       }}
+                      
                     >
                       <CardContent
                         orientation="horizontal"
                         sx={{ alignItems: "center", gap: 1 }}
                       >
-                        <Box
+                        <Box 
                           sx={{
                             position: "relative",
                             "&::before": {
@@ -103,7 +93,7 @@ export default function CheckInstagram() {
                         >
                           <Avatar
                             size="sm"
-                            src={ele.icon}
+                            src="/img/foodieland.webp"
                             sx={{
                               p: 0.5,
                               border: "2px solid",
@@ -112,7 +102,7 @@ export default function CheckInstagram() {
                           />
                         </Box>
                         <Typography sx={{ fontWeight: "lg" }}>
-                          {ele.name}
+                          Foodieland
                         </Typography>
                         <IconButton
                           variant="plain"
@@ -125,7 +115,7 @@ export default function CheckInstagram() {
                       </CardContent>
                       <CardOverflow>
                         <AspectRatio>
-                          <img src={ele.img} alt="" loading="lazy" />
+                          <img src={imagePath} alt="" loading="lazy" />
                         </AspectRatio>
                       </CardOverflow>
                       <CardContent
@@ -186,7 +176,7 @@ export default function CheckInstagram() {
                           textColor="text.primary"
                           sx={{ fontSize: "sm", fontWeight: "lg" }}
                         >
-                          {ele.likes} Likes
+                          {ele.recipeLike} Likes
                         </Link>
                         <Typography sx={{ fontSize: "sm" }}>
                           <Link
@@ -195,9 +185,9 @@ export default function CheckInstagram() {
                             textColor="text.primary"
                             sx={{ fontWeight: "lg" }}
                           >
-                            {ele.name}
+                            {ele.recipeName}
                           </Link>{" "}
-                          {ele.desc}
+                          {ele.recipeDirections}
                         </Typography>
                         <Link
                           component="button"
@@ -216,7 +206,7 @@ export default function CheckInstagram() {
                             my: 0.5,
                           }}
                         >
-                          2 DAYS AGO
+                          {dayjs(ele.createdAt).format("YYYY-MM-DD")}
                         </Link>
                       </CardContent>
                       <CardContent orientation="horizontal" sx={{ gap: 1 }}>
@@ -258,6 +248,12 @@ export default function CheckInstagram() {
               alignItems: "center",
             }}
             className="visit-button"
+            onClick={() =>
+              window.open(
+                "https://www.instagram.com/foodieland_official",
+                "_blank"
+              )
+            }
           >
             Visit Our Isntagram <Instagram sx={{ marginLeft: "8px" }} />
           </Button>

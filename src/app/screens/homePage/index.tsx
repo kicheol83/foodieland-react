@@ -10,7 +10,7 @@ import Simple from "./Simple";
 
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setRecipeDelicious, setRecipeTasty } from "./slice";
+import { setRecipeDelicious, setRecipeTasty, setReipeInstagram } from "./slice";
 import { Recipe } from "../../../libs/types/recipe";
 import RecipeService from "../../services/RecipeService";
 import { RecipeCategories } from "../../../libs/enums/categories.enum";
@@ -19,12 +19,13 @@ import { RecipeCategories } from "../../../libs/enums/categories.enum";
 const actionDispatch = (dispatch: Dispatch) => ({
   setRecipeTasty: (data: Recipe[]) => dispatch(setRecipeTasty(data)),
   setRecipeDelicious: (data: Recipe[]) => dispatch(setRecipeDelicious(data)),
+  setReipeInstagram: (data: Recipe[]) => dispatch(setReipeInstagram(data)),
 });
 
 export default function HomePage() {
   const { setRecipeTasty } = actionDispatch(useDispatch());
   const { setRecipeDelicious } = actionDispatch(useDispatch());
-  
+  const { setReipeInstagram } = actionDispatch(useDispatch());
 
   useEffect(() => {
     const recipe = new RecipeService();
@@ -49,6 +50,18 @@ export default function HomePage() {
       })
       .then((data) => {
         setRecipeDelicious(data);
+      })
+      .catch((err) => console.log(err));
+
+    recipe
+      .getRecipes({
+        page: 1,
+        limit: 4,
+        recipe: "recipeLike",
+        recipeType: RecipeCategories.LUNCH,
+      })
+      .then((data) => {
+        setReipeInstagram(data);
       })
       .catch((err) => console.log(err));
   }, []);

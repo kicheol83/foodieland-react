@@ -544,7 +544,7 @@
 
 .check-instagram-frame .check-inst-box .check-inst-title .inst-text1 {
   position: relative;
-  width: 796px;
+  width: auto;
   height: 58px;
   color: rgb(0, 0, 0);
   font-family: var(--font);

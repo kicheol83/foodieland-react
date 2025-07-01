@@ -20,6 +20,8 @@ const recipeDeliciousRetrieve = createSelector(
 );
 
 export default function DeliciousRecipe() {
+  const { recipeDelicious } = useSelector(recipeDeliciousRetrieve);
+
   const likeService = new LikeService();
   const history = useHistory();
 
@@ -51,7 +53,6 @@ export default function DeliciousRecipe() {
     }
   };
 
-  const { recipeDelicious } = useSelector(recipeDeliciousRetrieve);
 
   return (
     <div className="delicious-recipe-frame">
