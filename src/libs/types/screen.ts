@@ -1,3 +1,4 @@
+import { Author } from "./author";
 import { Recipe } from "./recipe";
 
 /** REACT AP STATE **/
@@ -15,8 +16,7 @@ export interface HomePageState {
 }
 
 export interface RecipePageState {
-  recipeHealthRce: Recipe[];
-  recipeIngredients: Recipe[];
-  recipeDirections: Recipe[];
-  recipeManyLik: Recipe[];
+  recipeHealthRice: Recipe[];
+  recipeManyLike: Recipe[];
+  recipeCreateAuthor: Author[];
 }

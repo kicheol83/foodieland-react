@@ -21,14 +21,13 @@ const recipeTastyRetrieve = createSelector(
 
 export default function Simple() {
   const history = useHistory();
-  
 
   const { recipeTasty } = useSelector(recipeTastyRetrieve);
 
-
-  const recipeHandlers = () => {
-    history.push("/recipe-details");
+  const choosenRecipeHandlar = (id: string) => {
+    history.push(`/recipe-details/${id}`);
   };
+
   return (
     <div className="simple-frame">
       <Container>
@@ -62,7 +61,7 @@ export default function Simple() {
                     key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
-                    onClick={recipeHandlers}
+                    onClick={() => choosenRecipeHandlar(ele._id)}
                   >
                     <img className="recipe-img" src={imagePath} alt="" />
                     <Typography
