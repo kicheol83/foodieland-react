@@ -1,20 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Collapse, Container, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import { retrieveRecipeTasty } from "./selector";
+import { Recipe, RecipeInquiry } from "../../../libs/types/recipe";
+import { RecipeCategories } from "../../../libs/enums/categories.enum";
+import { setRecipeTasty } from "./slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import RecipeService from "../../services/RecipeService";
+
+/** REDUX SLICE & SELECTOR **/
+
+const recipeTastyRetrieve = createSelector(
+  retrieveRecipeTasty,
+  (recipeTasty) => ({ recipeTasty })
+);
+const actionDispatch = (dispatch: Dispatch) => ({
+  setRecipeTasty: (data: Recipe[]) => dispatch(setRecipeTasty(data)),
+});
 
 export default function Categories() {
-  const history = useHistory();
-  const [showMore, setShowMore] = useState(true);
+ const { setRecipeTasty } = actionDispatch(useDispatch());
+  const { recipeTasty } = useSelector(recipeTastyRetrieve);
 
+  const [showMore, setShowMore] = useState(true);
   const handleToggle = () => {
     setShowMore((prev) => !prev);
   };
+  const [recipeSearch, setRecipeSearch] = useState<RecipeInquiry>({
+    page: 1,
+    limit: 9,
+    recipe: "createdAt",
+    recipeType: RecipeCategories.BREAKFAST,
+  });
 
+  useEffect(() => {
+    const recipe = new RecipeService();
+    recipe
+      .getRecipes(recipeSearch)
+      .then((data) => {
+        setRecipeTasty(data);
+      })
+      .catch((err) => console.log(err));
+  }, [recipeSearch]);
 
-  const pushRecipePage = () => {
-    history.push("/recipe-details");
+  /** HANDLERS **/
+  const searchTypeHandler = (recipeType: RecipeCategories) => {
+    recipeSearch.page = 1;
+    recipeSearch.recipeType = recipeType;
+    setRecipeSearch({ ...recipeSearch });
   };
+
   return (
     <div className="categories-frame">
       <Container>
@@ -50,11 +88,11 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box"
                 mt={"90px"}
-                onClick={pushRecipePage}
+                onClick={() => searchTypeHandler(RecipeCategories.BREAKFAST)}
               >
                 <img className="cate-icons" src="/icons/breakfast.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Breakfast
+                  BREAKFAST
                 </Typography>
               </Box>
               <Box
@@ -63,12 +101,12 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box vegan"
                 mt={"90px"}
-                onClick={pushRecipePage}
                 sx={{ backgroundColor: "FFE5E5" }}
+                onClick={() => searchTypeHandler(RecipeCategories.VEGAN)}
               >
                 <img className="cate-icons" src="/icons/vegan.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Vegan
+                  VEGAN
                 </Typography>
               </Box>
               <Box
@@ -77,11 +115,11 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box meat"
                 mt={"90px"}
-                onClick={pushRecipePage}
+                onClick={() => searchTypeHandler(RecipeCategories.MEAT)}
               >
                 <img className="cate-icons" src="/icons/meat.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Meat
+                  MEAT
                 </Typography>
               </Box>
               <Box
@@ -90,11 +128,11 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box dessert"
                 mt={"90px"}
-                onClick={pushRecipePage}
+                onClick={() => searchTypeHandler(RecipeCategories.DESSERT)}
               >
                 <img className="cate-icons" src="/icons/dessert.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Dessert
+                  DESSERT
                 </Typography>
               </Box>
               <Box
@@ -103,11 +141,11 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box lunch"
                 mt={"90px"}
-                onClick={pushRecipePage}
+                onClick={() => searchTypeHandler(RecipeCategories.LUNCH)}
               >
                 <img className="cate-icons" src="/icons/lunch.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Lunch
+                  LUNCH
                 </Typography>
               </Box>
               <Box
@@ -116,11 +154,11 @@ export default function Categories() {
                 alignItems={"center"}
                 className="category-recipe-box chocolate"
                 mt={"90px"}
-                onClick={pushRecipePage}
+                onClick={() => searchTypeHandler(RecipeCategories.CHOCOLATE)}
               >
                 <img className="cate-icons" src="/icons/chocolate.svg" alt="" />
                 <Typography className="breakfast" mt={"20px"}>
-                  Chocolate
+                  CHOCOLATE
                 </Typography>
               </Box>
             </Stack>

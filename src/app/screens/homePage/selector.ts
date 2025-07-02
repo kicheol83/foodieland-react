@@ -8,11 +8,6 @@ export const retrieveRecipeAfisha = createSelector(
   (HomePage) => HomePage.recipeAfisha
 );
 
-export const retrieveRecipeCategories = createSelector(
-  selectHomePage,
-  (HomePage) => HomePage.recipeCategories
-);
-
 export const retrieveRecipeTasty = createSelector(
   selectHomePage,
   (HomePage) => HomePage.recipeTasty

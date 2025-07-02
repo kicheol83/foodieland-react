@@ -16,9 +16,7 @@ const homePageSlice = createSlice({
     setRecipeAfisha: (state, action) => {
       state.recipeAfisha = action.payload;
     },
-    setRecipeCategories: (state, action) => {
-      state.recipeCategories = action.payload;
-    },
+   
     setRecipeTasty: (state, action) => {
       state.recipeTasty = action.payload;
     },
@@ -33,7 +31,6 @@ const homePageSlice = createSlice({
 
 export const {
   setRecipeAfisha,
-  setRecipeCategories,
   setRecipeTasty,
   setReipeInstagram,
   setRecipeDelicious,

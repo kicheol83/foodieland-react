@@ -25,7 +25,6 @@ import { createSelector } from "reselect";
 import { retrieveRecipeInstagram } from "./selector";
 import { Recipe } from "../../../libs/types/recipe";
 import { serverApi } from "../../../libs/config";
-import LikeService from "../../services/LikeService";
 
 /** REDUX SLICE & SELECTOR **/
 
