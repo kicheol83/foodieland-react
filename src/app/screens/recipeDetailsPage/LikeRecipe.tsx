@@ -1,13 +1,14 @@
 import { Box, Container, Stack } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import { createSelector } from "@reduxjs/toolkit";
-import { retrieveRecipeTasty } from "../homePage/selector";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { serverApi } from "../../../libs/config";
 import { retrieveRecipeManyLike } from "./selector";
+import LikeService from "../../services/LikeService";
+import { Recipe } from "../../../libs/types/recipe";
 
 /** REDUX SLICE & SELECTOR **/
 const recipeManyLikeRetrieve = createSelector(
@@ -15,17 +16,34 @@ const recipeManyLikeRetrieve = createSelector(
   (likeMany) => ({ likeMany })
 );
 
-
 export default function LikeRecipe() {
-  const [likedIndex, setLikedIndex] = useState<number[]>([]);
-  const toggleLiked = (index: number) => {
-    setLikedIndex((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const likeService = new LikeService();
+
+  const [likedIndex, setLikedIndex] = useState<string[]>([]);
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem("likedIndex") || "[]");
+    setLikedIndex(savedLikes);
+  }, []);
+
+  const toggleLiked = async (id: string) => {
+    try {
+      await likeService.toggleRecipeLike(id);
+
+      setLikedIndex((prev) => {
+        const updated = prev.includes(id)
+          ? prev.filter((i) => i !== id)
+          : [...prev, id];
+
+        localStorage.setItem("likedIndex", JSON.stringify(updated));
+
+        return updated;
+      });
+    } catch (err) {
+      console.error("Toggle like error:", err);
+    }
   };
 
   const { likeMany } = useSelector(recipeManyLikeRetrieve);
-
 
   return (
     <div className="like-recipe-frame">
@@ -34,9 +52,14 @@ export default function LikeRecipe() {
           <Typography className="like-recipe-title">
             You may popular these recipe too
           </Typography>
-          <Stack display={"flex"} flexWrap={"wrap"} flexDirection={"row"} justifyContent={"space-between"}>
+          <Stack
+            display={"flex"}
+            flexWrap={"wrap"}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+          >
             {likeMany.length !== 0 ? (
-              likeMany.map((ele, index) => {
+              likeMany.map((ele: Recipe) => {
                 const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
 
                 return (
@@ -54,14 +77,14 @@ export default function LikeRecipe() {
                     <img
                       className="heart"
                       src={
-                        likedIndex.includes(index)
+                        likedIndex.includes(ele._id)
                           ? "/icons/heart-red.svg"
                           : "/icons/heart-white.svg"
                       }
                       alt=""
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleLiked(index);
+                        toggleLiked(ele._id);
                       }}
                     />
                     <img className="recipe-img" src={imagePath} alt="" />

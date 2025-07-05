@@ -17,27 +17,27 @@ import "../css/recipe.css";
 import "../css/blog.css";
 import "../css/help.css";
 import "../css/userPage.css";
+import ScrollToTop from "../libs/scroll/scroll";
 
 function App() {
-  useEffect(() => {
-    
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <Navbar />
+      <ScrollToTop />
       <Switch>
-        <Route path="/recipe-details/:recipeId">
-          <RecipeDetailsPage />
-        </Route>
-        <Route path="/blog-page">
-          <BlogPage />
+        <Route path="/help">
+          <HelpPage />
         </Route>
         <Route path="/user">
           <UserPage />
         </Route>
-        <Route path="/help">
-          <HelpPage />
+        <Route path="/blog-page">
+          <BlogPage />
+        </Route>
+        <Route path="/recipe-details/:recipeId">
+          <RecipeDetailsPage />
         </Route>
         <Route path="/">
           <HomePage />
