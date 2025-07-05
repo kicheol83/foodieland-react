@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RecipePageState } from "../../../libs/types/screen";
+import { Author } from "../../../libs/types/author";
 
 const initialState: RecipePageState = {
-  recipeHealthRice: [],
+  recipeHealthRice: null,
 
   recipeManyLike: [],
-  recipeCreateAuthor: [],
+  recipeCreateAuthor: null,
 };
 
 const recipePaageSlice = createSlice({
@@ -25,11 +26,8 @@ const recipePaageSlice = createSlice({
   },
 });
 
-export const {
-  setRecipeHealthRice,
-  setRecipeManyLike,
-  setRecipeCreateAuthor,
-} = recipePaageSlice.actions;
+export const { setRecipeHealthRice, setRecipeManyLike, setRecipeCreateAuthor } =
+  recipePaageSlice.actions;
 
 const RecipePageReducer = recipePaageSlice.reducer;
 export default RecipePageReducer;

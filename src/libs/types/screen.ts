@@ -16,7 +16,7 @@ export interface HomePageState {
 }
 
 export interface RecipePageState {
-  recipeHealthRice: Recipe[];
+  recipeHealthRice: Recipe | null;
   recipeManyLike: Recipe[];
-  recipeCreateAuthor: Author[];
+  recipeCreateAuthor: Author | null;
 }

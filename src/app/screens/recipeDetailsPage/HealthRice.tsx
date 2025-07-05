@@ -94,14 +94,17 @@ export default function HealthRice() {
               <Box className="men-icon">
                 <Avatar
                   alt="Remy Sharp"
-                  src="/icons/ellipse-men.svg"
+                  src={`${serverApi}/${createAuthor?.authorImage}`}
                   sx={{ width: "50px", height: "50px" }}
                 />
               </Box>
               <Box className="men-title" ml={"16px"} mt={"7px"}>
-                <Typography className="typ-1">John Smith</Typography>
+                <Typography className="typ-1">
+                  {createAuthor?.authorNick || "Unknown Author"}
+                </Typography>
                 <Typography className="typ-2" mt={"5px"}>
-                  15 March 2022
+                  {dayjs(createAuthor?.createdAt).format("YYYY-MM-DD") ||
+                    "no data"}
                 </Typography>
               </Box>
               <div className="line"></div>
@@ -109,7 +112,9 @@ export default function HealthRice() {
                 <AccessTimeOutlinedIcon sx={{ mt: "11px" }} />
                 <Box flexDirection={"column"} sx={{ ml: "10px" }}>
                   <Typography className="text1">PREP TIME</Typography>
-                  <Typography className="minutes">15 MINUTES</Typography>
+                  <Typography className="minutes">
+                    {healthRice?.recipePrepTime} MINUTES
+                  </Typography>
                 </Box>
               </Box>
               <div className="line"></div>
@@ -117,7 +122,9 @@ export default function HealthRice() {
                 <AccessTimeOutlinedIcon sx={{ mt: "11px" }} />
                 <Box flexDirection={"column"} sx={{ ml: "10px" }}>
                   <Typography className="text1">COOK TIME</Typography>
-                  <Typography className="minutes">15 MINUTES</Typography>
+                  <Typography className="minutes">
+                    {healthRice?.recipeCookTime} MINUTES
+                  </Typography>
                 </Box>
               </Box>
               <div className="line"></div>
@@ -129,20 +136,14 @@ export default function HealthRice() {
               >
                 <FlatwareOutlinedIcon />
                 <Typography className="chicken-text" sx={{ ml: "10px" }}>
-                  CHICKEN
+                  {healthRice?.recipeName}
                 </Typography>
               </Box>
             </Box>
             <Box className="video-box">
-              {/* <iframe
-                width={"800px"}
-                height={"623px"}
-                src="https://www.youtube.com/embed/cGxt4JqzrNw"
-                title="YouTube video player"
-                frameBorder={"0"}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              ></iframe> */}
+              <img src="/img/brooke-lark.jpg" alt="" />
+              {/** SHU YERNI OZGARTIRSAM RECIPE OINI RASMI CHIQIB KELADI  **/}
+              {/* <img src={`${serverApi}/${healthRice?.recipeImage}`} alt="" /> */}
             </Box>
           </Box>
           <Stack
@@ -174,7 +175,9 @@ export default function HealthRice() {
                 ml={"32px"}
               >
                 <Typography className="name">Calories</Typography>
-                <Typography className="kgm">219.9 kcal</Typography>
+                <Typography className="kgm">
+                  {healthRice?.recipeNutrition?.[0]?.calories}
+                </Typography>
               </Box>
               <div className="bot-line"></div>
               <Box
@@ -186,7 +189,9 @@ export default function HealthRice() {
                 ml={"32px"}
               >
                 <Typography className="name">Total Fat</Typography>
-                <Typography className="kgm">0.7 g</Typography>
+                <Typography className="kgm">
+                  {healthRice?.recipeNutrition?.[0]?.fat}
+                </Typography>
               </Box>
               <div className="bot-line"></div>
               <Box
@@ -198,7 +203,9 @@ export default function HealthRice() {
                 ml={"32px"}
               >
                 <Typography className="name">Protein</Typography>
-                <Typography className="kgm">7.9 g</Typography>
+                <Typography className="kgm">
+                  {healthRice?.recipeNutrition?.[0]?.protein}
+                </Typography>
               </Box>
               <div className="bot-line"></div>
               <Box
@@ -210,7 +217,9 @@ export default function HealthRice() {
                 ml={"32px"}
               >
                 <Typography className="name">Carbohydrate</Typography>
-                <Typography className="kgm">22.3 g</Typography>
+                <Typography className="kgm">
+                  {healthRice?.recipeNutrition?.[0]?.carbs}
+                </Typography>
               </Box>
               <div className="bot-line"></div>
               <Box
@@ -222,7 +231,9 @@ export default function HealthRice() {
                 ml={"32px"}
               >
                 <Typography className="name">Cholesterol</Typography>
-                <Typography className="kgm">37.4 mg</Typography>
+                <Typography className="kgm">
+                  {healthRice?.recipeNutrition?.[0]?.sugar}
+                </Typography>
               </Box>
               <div className="bot-line"></div>
               <Typography className="bottom-title" mt={"150px"} ml={"32px"}>

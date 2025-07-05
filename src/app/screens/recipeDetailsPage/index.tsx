@@ -21,7 +21,7 @@ import { Author } from "../../../libs/types/author";
 const actionDispatch = (dispatch: Dispatch) => ({
   setRecipeHealthRice: (data: Recipe[]) => dispatch(setRecipeHealthRice(data)),
   setRecipeManyLike: (data: Recipe[]) => dispatch(setRecipeManyLike(data)),
-  setRecipeCreateAuthor: (data: Author[]) =>
+  setRecipeCreateAuthor: (data: Author) =>
     dispatch(setRecipeCreateAuthor(data)),
 });
 

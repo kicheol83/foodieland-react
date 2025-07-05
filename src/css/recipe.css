@@ -83,6 +83,14 @@
   height: 623px;
 }
 
+.recipe-details-frame .health-rice-frame .health-box .video-box img {
+  position: relative;
+  margin-top: 7px;
+  width: 824.21px;
+  height: 600px;
+  border-radius: 40px;
+}
+
 .recipe-details-frame .health-rice-frame .health-box .text1 {
   position: relative;
   width: 73px;
@@ -112,7 +120,7 @@
 
 .recipe-details-frame .health-rice-frame .health-box .chicken-text {
   position: relative;
-  width: 53px;
+  width: auto;
   height: 17px;
   color: rgba(0, 0, 0, 0.6);
   font-family: var(--font);
