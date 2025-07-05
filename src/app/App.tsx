@@ -27,7 +27,7 @@ function App() {
     <>
       <Navbar />
       <Switch>
-        <Route path="/recipe-details">
+        <Route path="/recipe-details/:recipeId">
           <RecipeDetailsPage />
         </Route>
         <Route path="/blog-page">

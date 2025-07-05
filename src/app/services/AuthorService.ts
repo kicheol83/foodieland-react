@@ -15,7 +15,7 @@ class AuthorService {
       console.log("URL:", `${serverApi}/author/all`);
       let url = `${this.path}/author/all`;
 
-      const result = await axios.get(url);
+      const result = await axios.get(url, { withCredentials: true });
       console.log("getRecipes", result);
 
       return result.data;
@@ -25,12 +25,11 @@ class AuthorService {
     }
   }
 
-  public async getAuthor(authorId: string): Promise<Author[]> {
+  public async getAuthor(authorId: string): Promise<Author> {
     try {
-      console.log("URL:", `${serverApi}/author/${authorId}`);
       let url = `${this.path}/author/${authorId}`;
 
-      const result = await axios.get(url);
+      const result = await axios.get(url, { withCredentials: true });
       console.log("getRecipes", result);
 
       return result.data;

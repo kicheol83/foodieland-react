@@ -1,12 +1,82 @@
 import { Avatar, Box, Container, Stack } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import LocalPrintshopIcon from "@mui/icons-material/LocalPrintshop";
 import ShareIcon from "@mui/icons-material/Share";
+import dayjs from "dayjs";
+
+import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "reselect";
+import {
+  retrieveRecipeCreateAuthor,
+  retrieveRecipeHealthRice,
+} from "./selector";
+import { Recipe } from "../../../libs/types/recipe";
+import { serverApi } from "../../../libs/config";
+import { useParams } from "react-router-dom";
+import RecipeService from "../../services/RecipeService";
+import {
+  setRecipeCreateAuthor,
+  setRecipeHealthRice,
+  setRecipeManyLike,
+} from "./slice";
+import { Dispatch } from "@reduxjs/toolkit";
+import AuthorService from "../../services/AuthorService";
+import { Author } from "../../../libs/types/author";
+
+/** REDUX SLICE & SELECTOR **/
+const actionDispatch = (dispatch: Dispatch) => ({
+  setRecipeHealthRice: (data: Recipe) => dispatch(setRecipeHealthRice(data)),
+  setRecipeManyLike: (data: Recipe[]) => dispatch(setRecipeManyLike(data)),
+  setRecipeCreateAuthor: (data: Author) =>
+    dispatch(setRecipeCreateAuthor(data)),
+});
+
+/** REDUX SLICE & SELECTOR **/
+
+const recipeHealthRiceRetrieve = createSelector(
+  retrieveRecipeHealthRice,
+  (healthRice) => ({ healthRice })
+);
+
+const recipeCreateAuthorRetrieve = createSelector(
+  retrieveRecipeCreateAuthor,
+  (createAuthor) => ({ createAuthor })
+);
 
 export default function HealthRice() {
+  const { healthRice } = useSelector(recipeHealthRiceRetrieve);
+  const { createAuthor } = useSelector(recipeCreateAuthorRetrieve);
+  const { setRecipeHealthRice, setRecipeCreateAuthor } = actionDispatch(
+    useDispatch()
+  );
+  const { recipeId } = useParams<{ recipeId: string }>();
+
+  console.log("recipeId:", recipeId);
+
+  useEffect(() => {
+    const recipeService = new RecipeService();
+    const authorService = new AuthorService();
+
+    recipeService
+      .getRecipe(recipeId)
+      .then((data) => {
+        setRecipeHealthRice(data);
+
+        if (data.authorId) {
+          return authorService.getAuthor(data.authorId);
+        }
+      })
+      .then((authorData) => {
+        if (authorData) {
+          console.log("Author info:", authorData);
+          setRecipeCreateAuthor(authorData);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, [recipeId]);
   return (
     <div className="health-rice-frame">
       <Container>
@@ -64,7 +134,7 @@ export default function HealthRice() {
               </Box>
             </Box>
             <Box className="video-box">
-              <iframe
+              {/* <iframe
                 width={"800px"}
                 height={"623px"}
                 src="https://www.youtube.com/embed/cGxt4JqzrNw"
@@ -72,7 +142,7 @@ export default function HealthRice() {
                 frameBorder={"0"}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
-              ></iframe>
+              ></iframe> */}
             </Box>
           </Box>
           <Stack
