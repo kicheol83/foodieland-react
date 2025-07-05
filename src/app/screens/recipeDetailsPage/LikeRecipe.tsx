@@ -3,33 +3,18 @@ import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
+import { createSelector } from "@reduxjs/toolkit";
+import { retrieveRecipeTasty } from "../homePage/selector";
+import { useDispatch, useSelector } from "react-redux";
+import { serverApi } from "../../../libs/config";
+import { retrieveRecipeManyLike } from "./selector";
 
-const list = [
-  {
-    name: "Big and Juicy Wagyu Beef Cheeseburger",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/hot-dog.webp",
-  },
-  {
-    name: "Fresh Lime Roasted Salmon with Ginger Sauce",
-    minut: "30 minutes",
-    type: "Noodles",
-    imgPath: "/img/pasta.webp",
-  },
-  {
-    name: "Strawberry Oatmeal Pancake with Honey Syrup",
-    minut: "30 minutes",
-    type: "Fresh",
-    imgPath: "/img/fresh.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/rice.webp",
-  },
-];
+/** REDUX SLICE & SELECTOR **/
+const recipeManyLikeRetrieve = createSelector(
+  retrieveRecipeManyLike,
+  (likeMany) => ({ likeMany })
+);
+
 
 export default function LikeRecipe() {
   const [likedIndex, setLikedIndex] = useState<number[]>([]);
@@ -39,20 +24,25 @@ export default function LikeRecipe() {
     );
   };
 
+  const { likeMany } = useSelector(recipeManyLikeRetrieve);
+
+
   return (
     <div className="like-recipe-frame">
       <Container>
         <Stack className="like-recipe-box" flexDirection={"column"}>
           <Typography className="like-recipe-title">
-            You may like these recipe too
+            You may popular these recipe too
           </Typography>
-          <Stack flexDirection={"row"} justifyContent={"space-between"}>
-            {list.length !== 0 ? (
-              list.map((ele, index) => {
+          <Stack display={"flex"} flexWrap={"wrap"} flexDirection={"row"} justifyContent={"space-between"}>
+            {likeMany.length !== 0 ? (
+              likeMany.map((ele, index) => {
+                const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
+
                 return (
                   <Stack
                     className="recipe-box"
-                    key={index}
+                    key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
                   >
@@ -74,19 +64,21 @@ export default function LikeRecipe() {
                         toggleLiked(index);
                       }}
                     />
-                    <img className="recipe-img" src={ele.imgPath} alt="" />
+                    <img className="recipe-img" src={imagePath} alt="" />
                     <Typography
                       className={"recipe-name"}
                       mt={"27px"}
                       ml={"3px"}
                     >
-                      {ele.name}
+                      {ele.recipeName}
                     </Typography>
                     <Stack flexDirection={"row"} ml={"3px"} mt={"20px"}>
                       <AccessTimeOutlinedIcon />
-                      <Typography ml={"11px"}>{ele.minut}</Typography>
+                      <Typography ml={"11px"}>
+                        {ele.recipeCookTime} minutes
+                      </Typography>
                       <FlatwareOutlinedIcon sx={{ ml: "30px" }} />
-                      <Typography ml={"11px"}>{ele.type}</Typography>
+                      <Typography ml={"11px"}>{ele.recipeType}</Typography>
                     </Stack>
                   </Stack>
                 );

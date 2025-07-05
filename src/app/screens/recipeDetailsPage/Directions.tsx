@@ -1,10 +1,7 @@
 import { Box, Checkbox, Container, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import {
-  retrieveRecipeCreateAuthor,
-  retrieveRecipeHealthRice,
-} from "./selector";
+import { retrieveRecipeHealthRice } from "./selector";
 import { createSelector } from "@reduxjs/toolkit";
 import { Recipe } from "../../../libs/types/recipe";
 import { useSelector } from "react-redux";
