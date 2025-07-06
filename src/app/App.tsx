@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./screens/homePage";
 import RecipeDetailsPage from "./screens/recipeDetailsPage";
@@ -8,6 +8,7 @@ import Navbar from "./components/header";
 import Footer from "./components/footer";
 import HelpPage from "./screens/helpPage";
 import Inbox from "./components/inbox";
+import ScrollToTop from "../libs/scroll/scroll";
 import "../css/app.css";
 import "../css/navbar.css";
 import "../css/home.css";
@@ -17,10 +18,15 @@ import "../css/recipe.css";
 import "../css/blog.css";
 import "../css/help.css";
 import "../css/userPage.css";
-import ScrollToTop from "../libs/scroll/scroll";
+import AuthenticationModal from "./components/auth";
 
 function App() {
-  useEffect(() => {}, []);
+  const [signupOpen, setSignupOpen] = useState<boolean>(false);
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+
+  /** HANDLERS **/
+  const handleSignupClose = () => setSignupOpen(false);
+  const handleLoginpClose = () => setLoginOpen(false);
 
   return (
     <>
@@ -45,6 +51,13 @@ function App() {
       </Switch>
       <Inbox />
       <Footer />
+
+      <AuthenticationModal
+        signupOpen={signupOpen}
+        loginOpen={loginOpen}
+        handleLoginClose={handleLoginpClose}
+        handleSignupClose={handleSignupClose}
+      />
     </>
   );
 }
