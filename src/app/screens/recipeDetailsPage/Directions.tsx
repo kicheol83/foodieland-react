@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { retrieveRecipeHealthRice } from "./selector";
 import { createSelector } from "@reduxjs/toolkit";
-import { Recipe } from "../../../libs/types/recipe";
 import { useSelector } from "react-redux";
 
 const recipeHealthRiceRetrieve = createSelector(

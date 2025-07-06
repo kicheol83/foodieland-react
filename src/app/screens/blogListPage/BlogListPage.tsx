@@ -25,10 +25,11 @@ import {
 import { serverApi } from "../../../libs/config";
 import { Recipe, RecipeInquiry } from "../../../libs/types/recipe";
 import LikeService from "../../services/LikeService";
-import { setBlogPageAuthor, setBlogPageRecipe } from "./slice";
+import { setBlogList, setBlogPageAuthor, setBlogPageRecipe } from "./slice";
 import { Author } from "../../../libs/types/author";
 import RecipeService from "../../services/RecipeService";
 import AuthorService from "../../services/AuthorService";
+import { useHistory } from "react-router-dom";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setBlogPageRecipe: (data: Recipe[]) => dispatch(setBlogPageRecipe(data)),
@@ -81,6 +82,7 @@ export default function BlogListPage() {
   });
 
   const [searchText, setSearchText] = useState<string>("");
+  const history = useHistory();
 
   useEffect(() => {
     const recipeService = new RecipeService();
@@ -142,6 +144,10 @@ export default function BlogListPage() {
   const paginationHandler = (e: ChangeEvent<any>, value: number) => {
     recipeSearch.page = value;
     setRecipeSearch({ ...recipeSearch });
+  };
+
+  const choosenRecipeHandler = (id: string) => {
+    history.push(`/blog-page/${id}`);
   };
 
   return (
@@ -227,7 +233,7 @@ export default function BlogListPage() {
           >
             <Stack className="blogs" flexDirection={"column"} flex={3}>
               {blogRecipe.length !== 0 ? (
-                blogRecipe.map((recipe, index) => {
+                blogRecipe.map((recipe: Recipe) => {
                   const imagePath = `${serverApi}/${recipe.recipeImage[0]}`;
                   const author = blogAuthor.find(
                     (a) => a._id === recipe.authorId
@@ -236,11 +242,12 @@ export default function BlogListPage() {
 
                   return (
                     <Box
-                      key={index}
+                      key={recipe._id}
                       className="recipe-info"
                       flexDirection={"row"}
                       display="flex"
                       mt={"15px"}
+                      onClick={() => choosenRecipeHandler(recipe._id)}
                     >
                       <Box
                         className="recipe-boxs"

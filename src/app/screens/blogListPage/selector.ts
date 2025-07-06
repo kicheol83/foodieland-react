@@ -22,3 +22,8 @@ export const retrieveBlogTastRecipe = createSelector(
   selectBlogPage,
   (BlogPage) => BlogPage.setBlogTastRecipe
 );
+
+export const retrieveBlogList = createSelector(
+  selectBlogPage,
+  (BlogPage) => BlogPage.setBlogList
+);

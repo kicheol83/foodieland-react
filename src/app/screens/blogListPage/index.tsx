@@ -1,19 +1,15 @@
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import BlogPostPage from "./BlogPostPage";
 import BlogListPage from "./BlogListPage";
-import { Author } from "../../../libs/types/author";
 import {
-  setBlogPageAuthor,
   setBlogPageManyLike,
-  setBlogPageRecipe,
   setBlogTastRecipe,
 } from "./slice";
-import { Recipe, RecipeInquiry } from "../../../libs/types/recipe";
+import { Recipe } from "../../../libs/types/recipe";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import RecipeService from "../../services/RecipeService";
-import AuthorService from "../../services/AuthorService";
 
 /** REDUX SLICE & SELECTOR **/
 const actionDispatch = (dispatch: Dispatch) => ({

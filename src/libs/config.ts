@@ -7,3 +7,9 @@ export const Messages = {
   error4: "Message is empty",
   error5: "Only images with jpeg, jpg, png format allowed!",
 };
+
+export interface AuthorInterviewItem {
+  _id: string;
+  question: string;
+  answer: string;
+}

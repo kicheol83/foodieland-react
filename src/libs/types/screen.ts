@@ -27,4 +27,5 @@ export interface BlogPageState {
   setBlogAuthor: Author[];
   setBlogManyLike: Recipe[];
   setBlogTastRecipe: Recipe[];
+  setBlogList: Recipe | null;
 }

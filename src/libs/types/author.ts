@@ -1,4 +1,3 @@
-
 export interface Author {
   _id: string;
   authorNick: string;
@@ -24,6 +23,7 @@ export interface AuthorUpdateInput {
 }
 
 export interface AuthorInterviewItem {
+  _id: string;
   question: string;
   answer: string;
 }

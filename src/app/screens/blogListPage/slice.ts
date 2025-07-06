@@ -6,6 +6,7 @@ const initialState: BlogPageState = {
   setBlogAuthor: [],
   setBlogManyLike: [],
   setBlogTastRecipe: [],
+  setBlogList: null,
 };
 
 const blogPageSlice = createSlice({
@@ -24,6 +25,9 @@ const blogPageSlice = createSlice({
     setBlogTastRecipe: (state, action) => {
       state.setBlogTastRecipe = action.payload;
     },
+    setBlogList: (state, action) => {
+      state.setBlogList = action.payload;
+    },
   },
 });
 
@@ -32,6 +36,7 @@ export const {
   setBlogPageAuthor,
   setBlogPageManyLike,
   setBlogTastRecipe,
+  setBlogList,
 } = blogPageSlice.actions;
 
 const BlogPageReducer = blogPageSlice.reducer;
