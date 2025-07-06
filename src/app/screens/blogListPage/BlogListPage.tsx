@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
+import dayjs from "dayjs";
 
 import {
   Avatar,
@@ -14,132 +14,134 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { createSelector, Dispatch } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  retrieveBlogAuthor,
+  retrieveBlogManyLIke,
+  retrieveBlogTastRecipe,
+  retrieveRecipeBlogPage,
+} from "./selector";
+import { serverApi } from "../../../libs/config";
+import { Recipe, RecipeInquiry } from "../../../libs/types/recipe";
+import LikeService from "../../services/LikeService";
+import { setBlogPageAuthor, setBlogPageRecipe } from "./slice";
+import { Author } from "../../../libs/types/author";
+import RecipeService from "../../services/RecipeService";
+import AuthorService from "../../services/AuthorService";
 
-/** TASTY RECIPE DATA **/
-interface recipe {
-  id: number;
-  name: string;
-  image: string;
-  creator: string;
-}
+const actionDispatch = (dispatch: Dispatch) => ({
+  setBlogPageRecipe: (data: Recipe[]) => dispatch(setBlogPageRecipe(data)),
+  setBlogPageAuthor: (data: Author[]) => dispatch(setBlogPageAuthor(data)),
+});
 
-const list: recipe[] = [
-  {
-    id: 1,
-    name: "Chicken Meatball with Creamy Chees",
-    image: "/img/baliq.webp",
-    creator: "By Adreas Paula",
-  },
-  {
-    id: 1,
-    name: "Chicken Meatball with Creamy Chees",
-    image: "/img/pasta.webp",
-    creator: "By Adreas Paula",
-  },
-  {
-    id: 1,
-    name: "Chicken Meatball with Creamy Chees",
-    image: "/img/honey.webp",
-    creator: "By Adreas Paula",
-  },
-];
+const recipeBlogPageRetrieve = createSelector(
+  retrieveRecipeBlogPage,
+  (blogRecipe) => ({
+    blogRecipe,
+  })
+);
 
-const listData = [
-  {
-    name: "Big and Juicy Wagyu Beef Cheeseburger",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/hot-dog.webp",
-  },
-  {
-    name: "Fresh Lime Roasted Salmon with Ginger Sauce",
-    minut: "30 minutes",
-    type: "Noodles",
-    imgPath: "/img/pasta.webp",
-  },
-  {
-    name: "Strawberry Oatmeal Pancake with Honey Syrup",
-    minut: "30 minutes",
-    type: "Fresh",
-    imgPath: "/img/fresh.webp",
-  },
-  {
-    name: "Fresh and Healthy Mixed Mayonnaise Salad",
-    minut: "30 minutes",
-    type: "Sanack",
-    imgPath: "/img/rice.webp",
-  },
-];
+const recipeCreateAuthorRetrieve = createSelector(
+  retrieveBlogAuthor,
+  (blogAuthor) => ({ blogAuthor })
+);
 
-/** RECIPE **/
-interface information {
-  id: number;
-  recipeName: string;
-  recipeDesc: string;
-  recipeImg: string;
-  creatorImg: string;
-  creaotorName: string;
-}
-const blogData: information[] = [
-  {
-    id: 1,
-    recipeName: "Crochet Projects for Noodle Lovers",
-    recipeDesc:
-      "Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ",
-    recipeImg: "/img/rice.webp",
-    creatorImg: "/img/creator-img.png",
-    creaotorName: "Taylor Smith",
-  },
-  {
-    id: 2,
-    recipeName: "Crochet Projects for Noodle Lovers",
-    recipeDesc:
-      "Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ",
-    recipeImg: "/img/hot-dog.webp",
-    creatorImg: "/img/creator-img.png",
-    creaotorName: "Taylor Smith",
-  },
-  {
-    id: 3,
-    recipeName: "Crochet Projects for Noodle Lovers",
-    recipeDesc:
-      "Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ",
-    recipeImg: "/img/blueberry.webp",
-    creatorImg: "/img/creator-img.png",
-    creaotorName: "Taylor Smith",
-  },
-  {
-    id: 4,
-    recipeName: "Crochet Projects for Noodle Lovers",
-    recipeDesc:
-      "Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ",
-    recipeImg: "/img/fresh.webp",
-    creatorImg: "/img/creator-img.png",
-    creaotorName: "Taylor Smith",
-  },
-  {
-    id: 5,
-    recipeName: "Crochet Projects for Noodle Lovers",
-    recipeDesc:
-      "Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ",
-    recipeImg: "/img/baliq.webp",
-    creatorImg: "/img/creator-img.png",
-    creaotorName: "Taylor Smith",
-  },
-];
+const recipeBlogLikeRetrieve = createSelector(
+  retrieveBlogManyLIke,
+  (blogLike) => ({ blogLike })
+);
 
-// ... import va data'lar o‘zgarmagan ...
+const recipeBlogTastRecipeRetrieve = createSelector(
+  retrieveBlogTastRecipe,
+  (tastRecipe) => ({ tastRecipe })
+);
 
 export default function BlogListPage() {
-  const [blogArticle, setBlogarticle] = useState<information[]>(blogData);
+  const { setBlogPageRecipe } = actionDispatch(useDispatch());
+  const { setBlogPageAuthor } = actionDispatch(useDispatch());
+  const { blogRecipe } = useSelector(recipeBlogPageRetrieve);
+  const { blogAuthor } = useSelector(recipeCreateAuthorRetrieve);
+  const { blogLike } = useSelector(recipeBlogLikeRetrieve);
+  const { tastRecipe } = useSelector(recipeBlogTastRecipeRetrieve);
 
-  const data = moment("2025-06-01");
+  const likeService = new LikeService();
 
-  const [likedIndex, setLikedIndex] = useState<number[]>([]);
-  const toggleLiked = (index: number) => {
-    setLikedIndex((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const [likedIndex, setLikedIndex] = useState<string[]>([]);
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem("likedIndex") || "[]");
+    setLikedIndex(savedLikes);
+  }, []);
+
+  const [recipeSearch, setRecipeSearch] = useState<RecipeInquiry>({
+    page: 1,
+    limit: 5,
+    recipe: "createdAt",
+    search: "",
+  });
+
+  const [searchText, setSearchText] = useState<string>("");
+
+  useEffect(() => {
+    const recipeService = new RecipeService();
+    const authorService = new AuthorService();
+
+    recipeService
+      .getRecipes(recipeSearch)
+      .then(async (recipes) => {
+        setBlogPageRecipe(recipes);
+
+        const authorPromises = recipes.map((recipe) => {
+          if (recipe.authorId) {
+            return authorService.getAuthor(recipe.authorId);
+          }
+          return null;
+        });
+
+        const authors = await Promise.all(authorPromises);
+
+        const validAuthors = authors.filter(
+          (author) => author !== null
+        ) as Author[];
+
+        setBlogPageAuthor(validAuthors);
+      })
+      .catch((err) => console.log("Blog page error:", err));
+  }, [recipeSearch]);
+
+  useEffect(() => {
+    if (searchText === "") {
+      recipeSearch.search = "";
+      setRecipeSearch({ ...recipeSearch });
+    }
+  }, [searchText]);
+
+  /** HANDLERS **/
+  const searchRecipeHandler = () => {
+    recipeSearch.search = searchText;
+    setRecipeSearch({ ...recipeSearch });
+  };
+  const toggleLiked = async (id: string) => {
+    try {
+      await likeService.toggleRecipeLike(id);
+
+      setLikedIndex((prev) => {
+        const updated = prev.includes(id)
+          ? prev.filter((i) => i !== id)
+          : [...prev, id];
+
+        localStorage.setItem("likedIndex", JSON.stringify(updated));
+
+        return updated;
+      });
+    } catch (err) {
+      console.error("Toggle like error:", err);
+    }
+  };
+
+  const paginationHandler = (e: ChangeEvent<any>, value: number) => {
+    recipeSearch.page = value;
+    setRecipeSearch({ ...recipeSearch });
   };
 
   return (
@@ -175,6 +177,12 @@ export default function BlogListPage() {
               }}
             >
               <TextField
+                type="search"
+                value={searchText}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") searchRecipeHandler();
+                }}
+                onChange={(e) => setSearchText(e.target.value)}
                 variant="standard"
                 placeholder="Search article, news or recipe..."
                 InputProps={{
@@ -187,6 +195,7 @@ export default function BlogListPage() {
                 fullWidth
               />
               <Button
+                onClick={searchRecipeHandler}
                 variant="contained"
                 sx={{
                   width: "150px",
@@ -214,76 +223,95 @@ export default function BlogListPage() {
             justifyContent="space-between"
             gap={4}
             mt={6}
+            height={"1193px"}
           >
             <Stack className="blogs" flexDirection={"column"} flex={3}>
-              {blogArticle.map((item) => (
-                <Box
-                  key={item.id}
-                  className="recipe-info"
-                  flexDirection={"row"}
-                  display="flex"
-                  mt={"15px"}
-                >
-                  <Box
-                    className="recipe-boxs"
-                    flexDirection={"row"}
-                    display="flex"
-                  >
-                    <img className="img-recipe" src={item.recipeImg} alt="" />
-                    <Box ml={"40px"} mt={"13px"} flexDirection={"column"}>
-                      <Typography className="txt1">
-                        {item.recipeName}
-                      </Typography>
-                      <Typography className="txt2">
-                        {item.recipeDesc}
-                      </Typography>
-                      <Box flexDirection={"row"} display={"flex"}>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={item.creatorImg}
-                          sx={{
-                            width: "40px",
-                            height: "40px",
-                            marginTop: "32px",
-                          }}
-                        />
-                        <Typography className="creator">
-                          {item.creaotorName}
-                        </Typography>
-                        <div className="line"></div>
-                        <Typography className="moment" mt={"30px"}>
-                          {data.format("D MMMM YYYY")}
-                        </Typography>
+              {blogRecipe.length !== 0 ? (
+                blogRecipe.map((recipe, index) => {
+                  const imagePath = `${serverApi}/${recipe.recipeImage[0]}`;
+                  const author = blogAuthor.find(
+                    (a) => a._id === recipe.authorId
+                  );
+                  const authorImagePath = `${serverApi}/${author?.authorImage}`;
+
+                  return (
+                    <Box
+                      key={index}
+                      className="recipe-info"
+                      flexDirection={"row"}
+                      display="flex"
+                      mt={"15px"}
+                    >
+                      <Box
+                        className="recipe-boxs"
+                        flexDirection={"row"}
+                        display="flex"
+                      >
+                        <img className="img-recipe" src={imagePath} alt="" />
+                        <Box ml={"40px"} mt={"13px"} flexDirection={"column"}>
+                          <Typography className="txt1">
+                            {recipe.recipeName}
+                          </Typography>
+                          <Typography className="txt2">
+                            {recipe.recipeDirections}
+                          </Typography>
+                          <Box flexDirection={"row"} display={"flex"}>
+                            <Avatar
+                              alt="Remy Sharp"
+                              src={authorImagePath}
+                              sx={{
+                                width: "40px",
+                                height: "40px",
+                                marginTop: "32px",
+                              }}
+                            />
+                            <Typography className="creator">
+                              {author?.authorNick}
+                            </Typography>
+                            <div className="line"></div>
+                            <Typography className="moment" mt={"30px"}>
+                              {dayjs(author?.createdAt).format("YYYY-MM-DD")}
+                            </Typography>
+                          </Box>
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
-                </Box>
-              ))}
+                  );
+                })
+              ) : (
+                <Box className="no-data">Blog & Article are not available</Box>
+              )}
             </Stack>
 
             <Box className="recipe" flex={1}>
               <Stack className="recipe-box" flexDirection={"column"}>
                 <Typography className="recipe-text">Tasty Recipe</Typography>
-
-                {list.map((item) => (
-                  <Box
-                    key={item.id}
-                    className="recipes"
-                    display="flex"
-                    flexDirection="row"
-                    mt={2}
-                  >
-                    <img className="img" src={item.image} alt="" />
-                    <Box className="recipe-text">
-                      <Typography className="big" ml={"24px"}>
-                        {item.name}
-                      </Typography>
-                      <Typography className="small" ml={"24px"}>
-                        {item.creator}
-                      </Typography>
-                    </Box>
-                  </Box>
-                ))}
+                {tastRecipe.length !== 0 ? (
+                  tastRecipe.map((ele: Recipe) => {
+                    const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
+                    return (
+                      <Box
+                        key={ele._id}
+                        className="recipes"
+                        display="flex"
+                        flexDirection="row"
+                        mt={2}
+                      >
+                        <img className="img" src={imagePath} alt="" />
+                        <Box className="recipe-text">
+                          <Typography className="big" ml={"24px"}>
+                            {ele.recipeName}
+                          </Typography>
+                          <Typography className="small" ml={"24px"}>
+                            {dayjs(ele?.createdAt).format("YYYY-MM-DD")}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    );
+                  })
+                ) : (
+                  <Box className="no-data">not available</Box>
+                )}
               </Stack>
               <Box className="icon-foto">
                 <img className="green" src="/img/green-back.png" alt="" />
@@ -301,8 +329,12 @@ export default function BlogListPage() {
             mt={"100px"}
           >
             <Pagination
-              count={5}
-              page={1}
+              count={
+                blogRecipe.length !== 0
+                  ? recipeSearch.page + 1
+                  : recipeSearch.page
+              }
+              page={recipeSearch.page}
               shape="rounded"
               renderItem={(item) => (
                 <PaginationItem
@@ -322,6 +354,7 @@ export default function BlogListPage() {
                   }}
                 />
               )}
+              onChange={paginationHandler}
             />
           </Stack>
         </Stack>
@@ -333,13 +366,20 @@ export default function BlogListPage() {
           <Typography className="like-recipe-title">
             You may like these recipe too
           </Typography>
-          <Stack flexDirection={"row"} justifyContent={"space-between"}>
-            {listData.length !== 0 ? (
-              listData.map((ele, index) => {
+          <Stack
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            display={"flex"}
+            flexWrap={"wrap"}
+          >
+            {blogLike.length !== 0 ? (
+              blogLike.map((ele: Recipe) => {
+                const imagePath = `${serverApi}/${ele.recipeImage[0]}`;
+
                 return (
                   <Stack
                     className="recipe-box"
-                    key={index}
+                    key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
                   >
@@ -351,29 +391,31 @@ export default function BlogListPage() {
                     <img
                       className="heart"
                       src={
-                        likedIndex.includes(index)
+                        likedIndex.includes(ele._id)
                           ? "/icons/heart-red.svg"
                           : "/icons/heart-white.svg"
                       }
                       alt=""
                       onClick={(e) => {
                         e.stopPropagation();
-                        toggleLiked(index);
+                        toggleLiked(ele._id);
                       }}
                     />
-                    <img className="recipe-img" src={ele.imgPath} alt="" />
+                    <img className="recipe-img" src={imagePath} alt="" />
                     <Typography
                       className={"recipe-name"}
                       mt={"27px"}
                       ml={"3px"}
                     >
-                      {ele.name}
+                      {ele.recipeName}
                     </Typography>
                     <Stack flexDirection={"row"} ml={"3px"} mt={"20px"}>
                       <AccessTimeOutlinedIcon />
-                      <Typography ml={"11px"}>{ele.minut}</Typography>
+                      <Typography ml={"11px"}>
+                        {ele.recipeCookTime} minutes
+                      </Typography>
                       <FlatwareOutlinedIcon sx={{ ml: "30px" }} />
-                      <Typography ml={"11px"}>{ele.type}</Typography>
+                      <Typography ml={"11px"}>{ele.recipeType}</Typography>
                     </Stack>
                   </Stack>
                 );

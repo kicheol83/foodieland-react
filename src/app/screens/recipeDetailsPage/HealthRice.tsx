@@ -142,7 +142,7 @@ export default function HealthRice() {
             </Box>
             <Box className="video-box">
               <img src="/img/brooke-lark.jpg" alt="" />
-              {/** SHU YERNI OZGARTIRSAM RECIPE OINI RASMI CHIQIB KELADI  **/}
+              {/** SHU YERNI OZGARTIRSAM RECIPE OINI RASMI CHIQIB  **/}
               {/* <img src={`${serverApi}/${healthRice?.recipeImage}`} alt="" /> */}
             </Box>
           </Box>

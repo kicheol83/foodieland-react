@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RecipePageState } from "../../../libs/types/screen";
-import { Author } from "../../../libs/types/author";
 
 const initialState: RecipePageState = {
   recipeHealthRice: null,
