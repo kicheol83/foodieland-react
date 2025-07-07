@@ -13,6 +13,7 @@ import { Messages } from "../../../libs/config";
 import { LoginInput, MemberInput } from "../../../libs/types/member";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../libs/sweetAlert";
+import { useGlobals } from "../../hooks/useGlobal";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -51,6 +52,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const [memberPhone, setMemberPhone] = useState<string>("");
   const [memberPassword, setMemberPassword] = useState<string>("");
   const [memberEmail, setMemberEmail] = useState<string>("");
+  const { setAuthMember } = useGlobals();
 
   /** HANDLERS **/
   const handleUserName = (e: T) => {
@@ -87,7 +89,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       const member = new MemberService();
       const result = await member.signup(signupInput);
 
-      // saving login
+      setAuthMember(result);
       handleSignupClose();
     } catch (err) {
       console.log(err);
@@ -111,7 +113,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       const member = new MemberService();
       const result = await member.login(loginInput);
 
-      // saving login
+      setAuthMember(result);
       handleLoginClose();
     } catch (err) {
       console.log(err);
@@ -119,6 +121,8 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       sweetErrorHandling(err).then();
     }
   };
+
+  const { authMember } = useGlobals();
 
   return (
     <div>
@@ -195,14 +199,6 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 >
                   <GoogleLoginButton />
                 </Fab>
-                <Fab
-                  sx={{ marginTop: "30px", width: "120px" }}
-                  variant="extended"
-                  // color="primary"
-                >
-                  <LoginIcon sx={{ mr: 1 }} />
-                  Telegram
-                </Fab>
               </Box>
             </Stack>
           </Stack>
@@ -275,18 +271,23 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   variant="extended"
                   // color="primary"
                 >
-                  <div>
-                    {" "}
-                    <GoogleLoginButton />
-                  </div>
-                </Fab>
-                <Fab
-                  sx={{ marginTop: "30px", width: "120px" }}
-                  variant="extended"
-                  // color="primary"
-                >
-                  <LoginIcon sx={{ mr: 1 }} />
-                  Telegram
+                  {!authMember ? (
+                    <div>
+                      {" "}
+                      <GoogleLoginButton />
+                    </div>
+                  ) : (
+                    <img
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "24px",
+                      }}
+                      src="/icons/default-user.svg"
+                      alt=""
+                      aria-haspopup={"true"}
+                    />
+                  )}
                 </Fab>
               </Box>
             </Stack>
