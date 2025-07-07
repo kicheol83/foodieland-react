@@ -4,8 +4,14 @@ import { NavLink } from "react-router-dom";
 import GoogleLoginButton from "../GoogleLoginButton";
 import { useState } from "react";
 
-export default function Navbar() {
-  const authMember = true;
+interface AuthProps {
+  setSignupOpen: (isOpen: boolean) => void;
+  setLoginOpen: (isOpen: boolean) => void;
+}
+
+export default function Navbar(props: AuthProps) {
+  const { setLoginOpen, setSignupOpen } = props;
+  const authMember = false;
   const [count, setCount] = useState(0);
   return (
     <div className="navbar">
@@ -67,34 +73,26 @@ export default function Navbar() {
             {!authMember ? (
               <>
                 <Box className={"hover-line"}>
-                  <Button sx={{ background: "black", color: "white" }}>
+                  <Button
+                    sx={{ background: "black", color: "white" }}
+                    onClick={() => setSignupOpen(true)}
+                  >
                     Signup
                   </Button>
                 </Box>
-
-                <Box className={"hover-line"} sx={{ ml: 2 }}>
-                  <GoogleLoginButton />
-                </Box>
               </>
-            ) : (
-              <img alt="" />
-            )}
+            ) : null}
 
             {!authMember ? (
               <Box className={"hover-line"}>
                 <Button
                   sx={{ background: "#3c7cf6", color: "white", ml: "-60px" }}
-                  onClick={() => setCount(count + 1)}
+                  onClick={() => setLoginOpen(true)}
                 >
                   Login
                 </Button>
               </Box>
-            ) : (
-              // <Box className={"hover-line"}>
-              //   <GoogleLoginButton />
-              // </Box>
-              <img alt="" />
-            )}
+            ) : null}
           </Stack>
 
           <Stack

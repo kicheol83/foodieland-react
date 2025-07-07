@@ -6,6 +6,13 @@ import Fade from "@material-ui/core/Fade";
 import { Box, Fab, Stack, TextField } from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
+import GoogleLoginButton from "../GoogleLoginButton";
+import { T } from "../../../libs/types/common";
+import { Message } from "@mui/icons-material";
+import { Messages } from "../../../libs/config";
+import { MemberInput } from "../../../libs/types/member";
+import MemberService from "../../services/MemberService";
+import { sweetErrorHandling } from "../../../libs/sweetAlert";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -40,8 +47,51 @@ interface AuthenticationModalProps {
 export default function AuthenticationModal(props: AuthenticationModalProps) {
   const { signupOpen, loginOpen, handleSignupClose, handleLoginClose } = props;
   const classes = useStyles();
+  const [memberNick, setMemberNick] = useState<string>("");
+  const [memberPhone, setMemberPhone] = useState<string>("");
+  const [memberPassword, setMemberPassword] = useState<string>("");
+  const [memberEmail, setMemberEmail] = useState<string>("");
 
   /** HANDLERS **/
+  const handleUserName = (e: T) => {
+    setMemberNick(e.target.value);
+  };
+  const handleUserPhone = (e: T) => setMemberPhone(e.target.value);
+  const handleUserPassword = (e: T) => setMemberPassword(e.target.value);
+  const handleUserEmail = (e: T) => setMemberEmail(e.target.value);
+
+  const handlePasswordKeyDown = (e: T) => {
+    if (e.key === "Enter" && signupOpen) {
+      handleSignupRequest().then();
+    }
+  };
+
+  const handleSignupRequest = async () => {
+    try {
+      const isFullfill =
+        memberNick !== "" &&
+        memberPhone !== "" &&
+        memberPassword !== "" &&
+        memberEmail !== "";
+      if (!isFullfill) throw new Error(Messages.error3);
+
+      const signupInput: MemberInput = {
+        memberNick: memberNick,
+        memberPhone: memberPhone,
+        memberPassword: memberPassword,
+        memberEmail: memberEmail,
+      };
+
+      const member = new MemberService();
+      const result = await member.signup(signupInput);
+
+      handleSignupClose();
+    } catch (err) {
+      console.log(err);
+      handleSignupClose();
+      sweetErrorHandling(err).then();
+    }
+  };
 
   return (
     <div>
@@ -75,23 +125,37 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 id="outlined-basic"
                 label="username"
                 variant="outlined"
+                onChange={handleUserName}
               />
               <TextField
                 sx={{ my: "17px" }}
                 id="outlined-basic"
                 label="phone number"
                 variant="outlined"
+                onChange={handleUserPhone}
               />
               <TextField
                 id="outlined-basic"
                 label="password"
                 variant="outlined"
+                onChange={handleUserPassword}
               />
+              <Box className="emailbox" sx={{ marginTop: "16px" }}>
+                <TextField
+                  type="email"
+                  id="outlined-basic"
+                  label="email"
+                  variant="outlined"
+                  onChange={handleUserEmail}
+                  onKeyDown={handlePasswordKeyDown}
+                />
+              </Box>
               <Box display={"flex"} flexDirection={"row"} marginTop={"20px"}>
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
                   color="primary"
+                  onClick={handleSignupRequest}
                 >
                   <LoginIcon sx={{ mr: 1 }} />
                   Signup
@@ -100,15 +164,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
-                  color="primary"
+                  // color="primary"
                 >
-                  <LoginIcon sx={{ mr: 1 }} />
-                  Google
+                  <GoogleLoginButton />
                 </Fab>
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
-                  color="primary"
+                  // color="primary"
                 >
                   <LoginIcon sx={{ mr: 1 }} />
                   Telegram
@@ -158,6 +221,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 variant={"outlined"}
                 type={"password"}
               />
+              <Box className="emailbox" sx={{ marginTop: "16px" }}>
+                <TextField
+                  type="email"
+                  id="outlined-basic"
+                  label="email"
+                  variant="outlined"
+                />
+              </Box>
               <Box display={"flex"} flexDirection={"row"}>
                 <Fab
                   sx={{ marginTop: "27px", width: "120px" }}
@@ -170,15 +241,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
-                  color="primary"
+                  // color="primary"
                 >
-                  <LoginIcon sx={{ mr: 1 }} />
-                  Google
+                  <GoogleLoginButton />
                 </Fab>
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
-                  color="primary"
+                  // color="primary"
                 >
                   <LoginIcon sx={{ mr: 1 }} />
                   Telegram

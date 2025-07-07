@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setSignupOpen={setSignupOpen} setLoginOpen={setLoginOpen} />
       <ScrollToTop />
       <Switch>
         <Route path="/help">
