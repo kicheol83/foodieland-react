@@ -10,7 +10,7 @@ import GoogleLoginButton from "../GoogleLoginButton";
 import { T } from "../../../libs/types/common";
 import { Message } from "@mui/icons-material";
 import { Messages } from "../../../libs/config";
-import { MemberInput } from "../../../libs/types/member";
+import { LoginInput, MemberInput } from "../../../libs/types/member";
 import MemberService from "../../services/MemberService";
 import { sweetErrorHandling } from "../../../libs/sweetAlert";
 
@@ -60,9 +60,11 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
   const handleUserPassword = (e: T) => setMemberPassword(e.target.value);
   const handleUserEmail = (e: T) => setMemberEmail(e.target.value);
 
-  const handlePasswordKeyDown = (e: T) => {
+  const handleEmailKeyDown = (e: T) => {
     if (e.key === "Enter" && signupOpen) {
       handleSignupRequest().then();
+    } else if (e.key === "Enter" && loginOpen) {
+      handleLoginRequest().then();
     }
   };
 
@@ -85,10 +87,35 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       const member = new MemberService();
       const result = await member.signup(signupInput);
 
+      // saving login
       handleSignupClose();
     } catch (err) {
       console.log(err);
       handleSignupClose();
+      sweetErrorHandling(err).then();
+    }
+  };
+
+  const handleLoginRequest = async () => {
+    try {
+      const isFullfill =
+        memberNick !== "" && memberPassword !== "" && memberEmail !== "";
+      if (!isFullfill) throw new Error(Messages.error3);
+
+      const loginInput: LoginInput = {
+        memberNick: memberNick,
+        memberPassword: memberPassword,
+        memberEmail: memberEmail,
+      };
+
+      const member = new MemberService();
+      const result = await member.login(loginInput);
+
+      // saving login
+      handleLoginClose();
+    } catch (err) {
+      console.log(err);
+      handleLoginClose();
       sweetErrorHandling(err).then();
     }
   };
@@ -147,7 +174,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   label="email"
                   variant="outlined"
                   onChange={handleUserEmail}
-                  onKeyDown={handlePasswordKeyDown}
+                  onKeyDown={handleEmailKeyDown}
                 />
               </Box>
               <Box display={"flex"} flexDirection={"row"} marginTop={"20px"}>
@@ -214,12 +241,14 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                 label="username"
                 variant="outlined"
                 sx={{ my: "10px" }}
+                onChange={handleUserName}
               />
               <TextField
                 id={"outlined-basic"}
                 label={"password"}
                 variant={"outlined"}
                 type={"password"}
+                onChange={handleUserPassword}
               />
               <Box className="emailbox" sx={{ marginTop: "16px" }}>
                 <TextField
@@ -227,6 +256,8 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   id="outlined-basic"
                   label="email"
                   variant="outlined"
+                  onChange={handleUserEmail}
+                  onKeyDown={handleEmailKeyDown}
                 />
               </Box>
               <Box display={"flex"} flexDirection={"row"}>
@@ -234,6 +265,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   sx={{ marginTop: "27px", width: "120px" }}
                   variant={"extended"}
                   color={"primary"}
+                  onClick={handleLoginRequest}
                 >
                   <LoginIcon sx={{ mr: 1 }} />
                   Login
@@ -243,7 +275,10 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   variant="extended"
                   // color="primary"
                 >
-                  <GoogleLoginButton />
+                  <div>
+                    {" "}
+                    <GoogleLoginButton />
+                  </div>
                 </Fab>
                 <Fab
                   sx={{ marginTop: "30px", width: "120px" }}
