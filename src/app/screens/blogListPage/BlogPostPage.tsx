@@ -241,7 +241,7 @@ export default function BlogPostPage() {
                     </Typography>
                     <Stack flexDirection={"row"} ml={"3px"} mt={"20px"}>
                       <AccessTimeOutlinedIcon />
-                      <Typography ml={"11px"}>{ele.recipeCookTime}</Typography>
+                      <Typography ml={"11px"}>{ele.recipeCookTime} minutes</Typography>
                       <FlatwareOutlinedIcon sx={{ ml: "30px" }} />
                       <Typography ml={"11px"}>{ele.recipeType}</Typography>
                     </Stack>

@@ -42,7 +42,7 @@
 
 .footer .footer-text {
   position: relative;
-  width: 400px;
+  width: auto;
   height: 28px;
   margin-top: 16px;
   color: rgba(0, 0, 0, 0.6);

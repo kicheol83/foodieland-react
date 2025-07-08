@@ -184,7 +184,7 @@ export default function CheckInstagram() {
                           >
                             {ele.recipeName}
                           </Link>{" "}
-                          {ele.recipeDirections}
+                          The React component library you always wanted
                         </Typography>
                         <Link
                           component="button"

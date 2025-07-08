@@ -10,7 +10,8 @@ export default function Footer() {
             <img src="/img/Foodieland1.webp" alt="" />
           </Box>
           <Box className="footer-text">
-            Lorem ipsum dolor sit amet, consectetuipisicing elit
+            Welcome to Foodieland — the first project by Ned, a student of
+            MIT25.
           </Box>
           <div className="center-line"></div>
           <Stack
@@ -19,7 +20,7 @@ export default function Footer() {
             alignItems={"center"}
             mt={"60px"}
           >
-            <Box className="webflow">© 2020 Flowbase. Powered by Webflow</Box>
+            <Box className="webflow">© 2025 Devex. Creator by MIT25-NED</Box>
             <Facebook sx={{ ml: "100px" }} />
             <Twitter sx={{ ml: "40px" }} />
             <Instagram sx={{ ml: "40px" }} />

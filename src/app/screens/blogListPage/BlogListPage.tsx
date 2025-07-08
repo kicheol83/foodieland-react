@@ -148,7 +148,7 @@ export default function BlogListPage() {
     setRecipeSearch({ ...recipeSearch });
   };
 
-  const choosenRecipeHandler = (id: string) => {
+  const choosenRecipeHandlerAuthor = (id: string) => {
     history.push(`/blog-page/${id}`);
   };
 
@@ -255,23 +255,30 @@ export default function BlogListPage() {
                       flexDirection={"row"}
                       display="flex"
                       mt={"15px"}
-                      onClick={() => choosenRecipeHandler(recipe._id)}
                     >
                       <Box
                         className="recipe-boxs"
                         flexDirection={"row"}
                         display="flex"
                       >
-                        <img className="img-recipe" src={imagePath} alt="" />
+                        <img
+                          onClick={() => choosenRecipeHandlar(recipe._id)}
+                          className="img-recipe"
+                          src={imagePath}
+                          alt=""
+                        />
                         <Box ml={"40px"} mt={"13px"} flexDirection={"column"}>
                           <Typography className="txt1">
                             {recipe.recipeName}
                           </Typography>
                           <Typography className="txt2">
-                            {recipe.recipeDirections}
+                            {recipe.recipeDirections?.[0]}
                           </Typography>
                           <Box flexDirection={"row"} display={"flex"}>
                             <Avatar
+                              onClick={() =>
+                                choosenRecipeHandlerAuthor(recipe._id)
+                              }
                               alt="Remy Sharp"
                               src={authorImagePath}
                               sx={{
