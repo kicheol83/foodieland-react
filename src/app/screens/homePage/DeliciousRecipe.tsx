@@ -25,10 +25,6 @@ export default function DeliciousRecipe() {
   const likeService = new LikeService();
   const history = useHistory();
 
-  const recipeHandler = () => {
-    history.push("/recipe-details");
-  };
-
   const [likedIndex, setLikedIndex] = useState<string[]>([]);
   useEffect(() => {
     const savedLikes = JSON.parse(localStorage.getItem("likedIndex") || "[]");
@@ -53,6 +49,9 @@ export default function DeliciousRecipe() {
     }
   };
 
+  const choosenRecipeHandlar = (id: string) => {
+    history.push(`/recipe-details/${id}`);
+  };
 
   return (
     <div className="delicious-recipe-frame">
@@ -67,9 +66,8 @@ export default function DeliciousRecipe() {
               Try this delicious recipe to make your day
             </Typography>
             <Typography className="del-text2">
-              Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad
-              minim
+              With the right guidance and ingredients, you can turn everyday
+              meals into restaurant-quality experiences
             </Typography>
           </Box>
           <Box
@@ -88,7 +86,7 @@ export default function DeliciousRecipe() {
                     key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
-                    onClick={recipeHandler}
+                    onClick={() => choosenRecipeHandlar(ele._id)}
                   >
                     <img
                       className="ellipse-white"

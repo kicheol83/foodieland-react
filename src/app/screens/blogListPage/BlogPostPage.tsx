@@ -4,16 +4,13 @@ import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import dayjs from "dayjs";
-import {
-  retrieveBlogList,
-  retrieveBlogManyLIke,
-} from "./selector";
+import { retrieveBlogList, retrieveBlogManyLIke } from "./selector";
 import { createSelector, Dispatch } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Recipe } from "../../../libs/types/recipe";
 import { serverApi } from "../../../libs/config";
 import LikeService from "../../services/LikeService";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import RecipeService from "../../services/RecipeService";
 import { setBlogList } from "./slice";
 import { Author } from "../../../libs/types/author";
@@ -33,12 +30,11 @@ const blogListRetrieve = createSelector(retrieveBlogList, (blogList) => ({
 }));
 
 export default function BlogPostPage() {
+  const history = useHistory();
   const [recipeAuthor, setRecipeAuthor] = useState<Author | null>(null);
-
   const { blogLike } = useSelector(recipeBlogLikeRetrieve);
-
   const likeService = new LikeService();
-  const { blogList } = useSelector(blogListRetrieve);
+  // const { blogList } = useSelector(blogListRetrieve);
 
   const [likedIndex, setLikedIndex] = useState<string[]>([]);
   useEffect(() => {
@@ -87,6 +83,10 @@ export default function BlogPostPage() {
   }, []);
   const interviews = recipeAuthor?.authorInterview;
 
+  const choosenRecipeHandlar = (blogId: string) => {
+    history.push(`/recipe-details/${blogId}`);
+  };
+
   return (
     <div className="blog-post-page">
       <Container>
@@ -123,10 +123,8 @@ export default function BlogPostPage() {
               </Typography>
             </Box>
             <Typography mt={"48px"} flexDirection={"row"} className="post-desc">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              ac ultrices odio. Nulla at congue diam, at dignissim turpis. Ut
-              vehicula sed velit a faucibus. In feugiat vestibulum velit vel
-              pulvinar.
+              From basic techniques to expert-level cooking, this complete guide
+              will help you master the art of cuisine step by step pulvinar
             </Typography>
           </Box>
           <img className="shef-img" src="/img/shef.png" alt="" />
@@ -163,8 +161,8 @@ export default function BlogPostPage() {
 
               <Box className="bottom-text" mt={"64px"}>
                 <Typography className="bottom-txt">
-                  “Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Curabitur ac ultrices odio.”
+                  Believe in your passion, practice with patience, and never
+                  stop learning—great things take time and dedication
                 </Typography>
               </Box>
 
@@ -213,6 +211,7 @@ export default function BlogPostPage() {
                     key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
+                    onClick={() => choosenRecipeHandlar(ele._id)}
                   >
                     <img
                       className="ellipse-white"
@@ -250,7 +249,7 @@ export default function BlogPostPage() {
                 );
               })
             ) : (
-              <Box className="no-data">Popular products are not available</Box>
+              <Box className="no-data">Popular recipe are not available</Box>
             )}
           </Stack>
         </Stack>

@@ -1,7 +1,36 @@
-import { Box, Button, Container, Stack, TextField } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import {
+  Box,
+  Button,
+  Container,
+  Snackbar,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 
 export default function Inbox() {
+  const [email, setEmail] = useState("");
+  const [successOpen, setSuccessOpen] = useState(false);
+
+  const handleSubscribe = () => {
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      alert("Iltimos, to'g'ri email kiriting.");
+      return;
+    }
+
+    // 🔹 Bu yerda siz serverga yuborishingiz mumkin
+    console.log("Yuborilgan email:", email);
+
+    // 🔹 Email yuborilgan deb hisoblab inputni tozalaymiz va habar ko'rsatamiz
+    setEmail("");
+    setSuccessOpen(true);
+  };
+
+  const handleClose = () => {
+    setSuccessOpen(false);
+  };
+
   return (
     <div className="inbox">
       <Container>
@@ -20,8 +49,8 @@ export default function Inbox() {
             Deliciousness to your inbox
           </Typography>
           <Typography className="text-inb" mt={"24px"}>
-            Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqut enim ad minim
+            Discover hand-picked recipes, expert tips, and kitchen inspiration
+            delivered straight to your inbox every week
           </Typography>
           <Box
             className="input-box"
@@ -49,6 +78,8 @@ export default function Inbox() {
                 placeholder="Your email address..."
                 variant="outlined"
                 fullWidth
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     border: "none",
@@ -58,6 +89,7 @@ export default function Inbox() {
               />
               <Button
                 variant="contained"
+                onClick={handleSubscribe}
                 sx={{
                   backgroundColor: "black",
                   color: "white",
@@ -73,6 +105,15 @@ export default function Inbox() {
             </Box>
           </Box>
         </Stack>
+
+        {/* ✅ Snackbar for success message */}
+        <Snackbar
+          open={successOpen}
+          onClose={handleClose}
+          message="Siz Foodieland saytiga muvaffaqiyatli obuna bo‘ldingiz!"
+          autoHideDuration={5000}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        />
       </Container>
     </div>
   );

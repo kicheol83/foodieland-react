@@ -49,9 +49,8 @@ export default function CheckInstagram() {
               Check out @foodieland_official on Instagram
             </Typography>
             <Typography className="inst-text2">
-              Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad
-              minim
+              Join our Instagram family for daily recipes, behind-the-scenes
+              moments, and cooking hacks you won’t want to miss
             </Typography>
           </Box>
           <Box className="insta-boxs" mt={"80px"}>
@@ -61,19 +60,18 @@ export default function CheckInstagram() {
 
                 return (
                   <CssVarsProvider key={ele._id}>
-                    <Card 
+                    <Card
                       className="inst-card"
                       variant="outlined"
                       sx={{
                         "--Card-radius": (theme) => theme.vars.radius.xs,
                       }}
-                      
                     >
                       <CardContent
                         orientation="horizontal"
                         sx={{ alignItems: "center", gap: 1 }}
                       >
-                        <Box 
+                        <Box
                           sx={{
                             position: "relative",
                             "&::before": {

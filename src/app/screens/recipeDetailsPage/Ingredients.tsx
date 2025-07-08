@@ -8,6 +8,7 @@ import { retrieveRecipeTasty } from "../homePage/selector";
 import { serverApi } from "../../../libs/config";
 import { Recipe } from "../../../libs/types/recipe";
 import dayjs from "dayjs";
+import { useHistory } from "react-router-dom";
 
 const recipeHealthRiceRetrieve = createSelector(
   retrieveRecipeHealthRice,
@@ -22,6 +23,7 @@ const recipeTastyRetrieve = createSelector(
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 export default function Ingredients() {
+  const history = useHistory();
   const { healthRice } = useSelector(recipeHealthRiceRetrieve);
   const { recipeTasty } = useSelector(recipeTastyRetrieve);
 
@@ -40,6 +42,10 @@ export default function Ingredients() {
     const updated = [...checkedStates];
     updated[groupIndex][itemIndex] = !updated[groupIndex][itemIndex];
     setCheckedStates(updated);
+  };
+
+  const choosenRecipeHandlar = (blogId: string) => {
+    history.push(`/recipe-details/${blogId}`);
   };
 
   return (
@@ -127,6 +133,7 @@ export default function Ingredients() {
                       display="flex"
                       flexDirection="row"
                       mt={2}
+                      onClick={() => choosenRecipeHandlar(recipe._id)}
                     >
                       <img className="img" src={imagePath} alt="" />
                       <Box className="recipe-text">

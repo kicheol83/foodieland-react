@@ -10,11 +10,28 @@ import {
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import PlayCircleOutlineOutlinedIcon from "@mui/icons-material/PlayCircleOutlineOutlined";
+import { retrieveRecipeTasty } from "./selector";
+import { createSelector } from "@reduxjs/toolkit";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
+const recipeTastyRetrieve = createSelector(
+  retrieveRecipeTasty,
+  (recipeTasty) => ({ recipeTasty })
+);
 
 export default function ChickenAfisha() {
+  const history = useHistory();
+
+  const { recipeTasty } = useSelector(recipeTastyRetrieve);
+
+  const choosenRecipeHandlar = (id: string) => {
+    history.push(`/recipe-details/${id}`);
+  };
+
   return (
     <div className="check-afisha-frame">
-     <Container>
+      <Container>
         <Stack className="stk">
           <Stack className="box-item">
             <Stack
@@ -30,9 +47,9 @@ export default function ChickenAfisha() {
               Spicy delicious chicken wings
             </Typography>
             <Typography ml={"50px"} mt={"24px"} className="tp-2">
-              Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad
-              minim
+              These bold, juicy wings pack a flavorful punch. Perfect for game
+              nights, parties, or whenever you're craving something spicy and
+              satisfying.
             </Typography>
             <Stack flexDirection={"row"} mt={"30px"}>
               <Box className="rectangle" ml={"50px"}>
@@ -46,11 +63,17 @@ export default function ChickenAfisha() {
             </Stack>
             <Stack flexDirection={"row"}>
               <Box className="men-icon" mt={"99px"}>
-                <Avatar alt="Remy Sharp" src="/icons/ellipse-men.svg" sx={{width: "60px", height: "60px"}} />
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/icons/ellipse-men.svg"
+                  sx={{ width: "60px", height: "60px" }}
+                />
               </Box>
               <Box className="men-title" mt={"108px"} ml={"20px"}>
                 <Typography className="typ-1">John Smith</Typography>
-                <Typography className="typ-2" mt={"5px"}>15 March 2022</Typography>
+                <Typography className="typ-2" mt={"5px"}>
+                  15 March 2022
+                </Typography>
               </Box>
               <Box
                 className="view-button"
@@ -67,7 +90,11 @@ export default function ChickenAfisha() {
             <img src="/img/chicken-back.webp" alt="" />
           </Stack>
           <Box className="center-icon">
-            <img className="icon-ellipse" src="/icons/ellipse-white.svg" alt="" />
+            <img
+              className="icon-ellipse"
+              src="/icons/ellipse-white.svg"
+              alt=""
+            />
             <img className="icon-hand" src="/img/ramen.webp" alt="" />
           </Box>
         </Stack>

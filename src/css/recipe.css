@@ -13,6 +13,13 @@
   background: white;
 }
 
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
 .recipe-details-frame .health-rice-frame .health-box {
   position: relative;
   width: auto;

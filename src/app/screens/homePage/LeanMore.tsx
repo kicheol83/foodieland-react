@@ -1,8 +1,14 @@
 import React from "react";
 import { Box, Button, Container, Stack } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { useHistory } from "react-router-dom";
 
 export default function LeanMore() {
+  const history = useHistory();
+
+  const choosenRecipeHandlar = () => {
+    history.push(`/blog-page`);
+  };
   return (
     <div className="lean-more-frame">
       <Container>
@@ -12,13 +18,13 @@ export default function LeanMore() {
               Everyone can be a chef in their own kitchen
             </Typography>
             <Typography className="lean-more-text">
-              Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad
-              minim
+              With the right guidance and ingredients, you can turn everyday
+              meals into restaurant-quality experiences
             </Typography>
             <Button
               className="lean-more-button"
               variant="contained"
+              onClick={choosenRecipeHandlar}
               sx={{
                 background: "black",
                 justifyContent: "center",

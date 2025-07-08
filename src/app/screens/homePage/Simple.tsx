@@ -42,9 +42,8 @@ export default function Simple() {
               Simple and tasty recipes
             </Typography>
             <Typography className="box-title2" mt={"24px"}>
-              Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad
-              minim
+              Explore quick and wholesome recipes made with fresh ingredients to
+              elevate your everyday meals with minimal effort
             </Typography>
           </Stack>
           <Stack

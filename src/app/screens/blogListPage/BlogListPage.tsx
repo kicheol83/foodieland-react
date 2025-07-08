@@ -25,7 +25,7 @@ import {
 import { serverApi } from "../../../libs/config";
 import { Recipe, RecipeInquiry } from "../../../libs/types/recipe";
 import LikeService from "../../services/LikeService";
-import { setBlogList, setBlogPageAuthor, setBlogPageRecipe } from "./slice";
+import { setBlogPageAuthor, setBlogPageRecipe } from "./slice";
 import { Author } from "../../../libs/types/author";
 import RecipeService from "../../services/RecipeService";
 import AuthorService from "../../services/AuthorService";
@@ -124,7 +124,7 @@ export default function BlogListPage() {
     recipeSearch.search = searchText;
     setRecipeSearch({ ...recipeSearch });
   };
-  
+
   const toggleLiked = async (id: string) => {
     try {
       await likeService.toggleRecipeLike(id);
@@ -154,6 +154,9 @@ export default function BlogListPage() {
 
   const { authMember } = useGlobals();
   if (!authMember) history.push("/");
+  const choosenRecipeHandlar = (blogId: string) => {
+    history.push(`/recipe-details/${blogId}`);
+  };
 
   return (
     <div className="blog-list-page">
@@ -167,8 +170,8 @@ export default function BlogListPage() {
           >
             <Typography className="list-text1">Blog & Article</Typography>
             <Typography className="list-text2">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore
+              Stay inspired with our latest cooking stories, expert advice, and
+              helpful tips to make the most of your culinary journey
             </Typography>
           </Box>
 
@@ -308,6 +311,7 @@ export default function BlogListPage() {
                         display="flex"
                         flexDirection="row"
                         mt={2}
+                        onClick={() => choosenRecipeHandlar(ele._id)}
                       >
                         <img className="img" src={imagePath} alt="" />
                         <Box className="recipe-text">

@@ -4,11 +4,12 @@ import Typography from "@mui/material/Typography";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import FlatwareOutlinedIcon from "@mui/icons-material/FlatwareOutlined";
 import { createSelector } from "@reduxjs/toolkit";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { serverApi } from "../../../libs/config";
 import { retrieveRecipeManyLike } from "./selector";
 import LikeService from "../../services/LikeService";
 import { Recipe } from "../../../libs/types/recipe";
+import { useHistory } from "react-router-dom";
 
 /** REDUX SLICE & SELECTOR **/
 const recipeManyLikeRetrieve = createSelector(
@@ -18,6 +19,7 @@ const recipeManyLikeRetrieve = createSelector(
 
 export default function LikeRecipe() {
   const likeService = new LikeService();
+  const history = useHistory();
 
   const [likedIndex, setLikedIndex] = useState<string[]>([]);
   useEffect(() => {
@@ -44,7 +46,10 @@ export default function LikeRecipe() {
   };
 
   const { likeMany } = useSelector(recipeManyLikeRetrieve);
-
+  const choosenRecipeHandlar = (id: string) => {
+    console.log("id=>", id);
+    history.push(`/recipe-details/${id}`);
+  };
   return (
     <div className="like-recipe-frame">
       <Container>
@@ -68,6 +73,7 @@ export default function LikeRecipe() {
                     key={ele._id}
                     flexDirection={"row"}
                     mt={"40px"}
+                    onClick={() => choosenRecipeHandlar(ele._id)}
                   >
                     <img
                       className="ellipse-white"
