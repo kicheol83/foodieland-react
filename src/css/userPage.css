@@ -229,11 +229,29 @@
 	color: black;
 }
 
+.user-page .settings .spec-input1 {
+	position: relative;
+	margin-top: 10px;
+	padding-left: 20px;
+	width: 96%;
+	height: 54px;
+	border: none;
+	background: #f7f7f7;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	font-family: 'GT Walsheim Pro';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 15px;
+	line-height: 26px;
+	color: #4f547b;
+}
+
 .user-page .settings .spec-input {
 	position: relative;
 	margin-top: 10px;
 	padding-left: 20px;
-	width: 100%;
+	width: 89%;
 	height: 54px;
 	border: none;
 	background: #f7f7f7;
@@ -251,7 +269,7 @@
 	position: relative;
 	margin-top: 20px;
 	padding: 20px;
-	width: 100%;
+	width: 96%;
 	height: 200px;
 	border: none;
 	background: #f7f7f7;

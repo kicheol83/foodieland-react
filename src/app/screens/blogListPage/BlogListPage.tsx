@@ -30,6 +30,7 @@ import { Author } from "../../../libs/types/author";
 import RecipeService from "../../services/RecipeService";
 import AuthorService from "../../services/AuthorService";
 import { useHistory } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobal";
 
 const actionDispatch = (dispatch: Dispatch) => ({
   setBlogPageRecipe: (data: Recipe[]) => dispatch(setBlogPageRecipe(data)),
@@ -123,6 +124,7 @@ export default function BlogListPage() {
     recipeSearch.search = searchText;
     setRecipeSearch({ ...recipeSearch });
   };
+  
   const toggleLiked = async (id: string) => {
     try {
       await likeService.toggleRecipeLike(id);
@@ -149,6 +151,9 @@ export default function BlogListPage() {
   const choosenRecipeHandler = (id: string) => {
     history.push(`/blog-page/${id}`);
   };
+
+  const { authMember } = useGlobals();
+  if (!authMember) history.push("/");
 
   return (
     <div className="blog-list-page">
