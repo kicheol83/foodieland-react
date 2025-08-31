@@ -44,7 +44,7 @@
 .recipe-details-frame .health-rice-frame .health-box .typ-1 {
   position: relative;
   width: auto;
-  height: 19px;
+  height: auto;
   color: rgb(0, 0, 0);
   font-family: var(--font);
   font-size: 16px;
