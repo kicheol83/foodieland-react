@@ -5,7 +5,7 @@ module.exports = {
     {
       name: "FOODIELAND-FRONTEND",
       script: isWindows ? "serve.cmd" : "serve",
-      args: "-s build -l 3000",
+      args: isWindows ? "-s build -l 3000" : "-s build --listen 3000",
       watch: false,
       interpreter: isWindows ? "none" : undefined,
       env: {
