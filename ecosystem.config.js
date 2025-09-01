@@ -7,7 +7,7 @@ module.exports = {
       script: isWindows ? "serve.cmd" : "serve",
       args: "-s build -l 3000",
       watch: false,
-      interpreter: "none",
+      interpreter: isWindows ? "none" : undefined,
       env: {
         NODE_ENV: "production",
       },
