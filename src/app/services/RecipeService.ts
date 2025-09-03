@@ -11,11 +11,16 @@ class RecipeService {
 
   public async getRecipes(input: RecipeInquiry): Promise<Recipe[]> {
     try {
-      let url = `${this.path}/recipes/all?recipe=${input.recipe}&page=${input.page}&limit=${input.limit}`;
+      const page = Number(input.page) || 1;
+      const limit = Number(input.limit) || 9;
+
+      let url = `${this.path}/recipes/all?recipe=${
+        input.recipe || ""
+      }&page=${page}&limit=${limit}`;
       if (input.recipeType) url += `&recipeType=${input.recipeType}`;
       if (input.search) url += `&search=${input.search}`;
 
-      const result = await axios.get(url);
+      const result = await axios.get(url, { withCredentials: true });
       console.log("getRecipes", result);
 
       return result.data;

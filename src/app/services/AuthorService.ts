@@ -16,11 +16,11 @@ class AuthorService {
       let url = `${this.path}/author/all`;
 
       const result = await axios.get(url, { withCredentials: true });
-      console.log("getRecipes", result);
+      console.log("getAuthors", result);
 
       return result.data;
     } catch (err) {
-      console.log("Error, getRecipes", err);
+      console.log("Error, getAuthors", err);
       throw err;
     }
   }
@@ -30,11 +30,11 @@ class AuthorService {
       let url = `${this.path}/author/${authorId}`;
 
       const result = await axios.get(url, { withCredentials: true });
-      console.log("getRecipes", result);
+      console.log("getAuthor", result);
 
       return result.data;
     } catch (err) {
-      console.log("Error, getRecipes", err);
+      console.log("Error, getAuthor", err);
       throw err;
     }
   }
