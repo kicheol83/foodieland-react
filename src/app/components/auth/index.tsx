@@ -149,7 +149,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
               alt="camera"
               style={{ width: "-56%" }}
             />
-            <Stack sx={{ marginLeft: "-67px", alignItems: "center" }}>
+            <Stack sx={{ alignItems: "center" }}>
               <h2>Signup Form</h2>
               <TextField
                 sx={{ marginTop: "7px" }}
@@ -196,9 +196,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
                   // color="primary"
-                >
-                  <GoogleLoginButton />
-                </Fab>
+                ></Fab>
               </Box>
             </Stack>
           </Stack>
@@ -270,25 +268,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   sx={{ marginTop: "30px", width: "120px" }}
                   variant="extended"
                   // color="primary"
-                >
-                  {!authMember ? (
-                    <div>
-                      {" "}
-                      <GoogleLoginButton />
-                    </div>
-                  ) : (
-                    <img
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "24px",
-                      }}
-                      src="/icons/default-user.svg"
-                      alt=""
-                      aria-haspopup={"true"}
-                    />
-                  )}
-                </Fab>
+                ></Fab>
               </Box>
             </Stack>
           </Stack>
