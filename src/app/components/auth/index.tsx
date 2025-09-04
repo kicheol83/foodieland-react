@@ -187,12 +187,6 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   <LoginIcon sx={{ mr: 1 }} />
                   Signup
                 </Fab>
-
-                <Fab
-                  sx={{ marginTop: "30px", width: "120px" }}
-                  variant="extended"
-                  // color="primary"
-                ></Fab>
               </Box>
             </Stack>
           </Stack>
@@ -260,11 +254,6 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
                   <LoginIcon sx={{ mr: 1 }} />
                   Login
                 </Fab>
-                <Fab
-                  sx={{ marginTop: "30px", width: "120px" }}
-                  variant="extended"
-                  // color="primary"
-                ></Fab>
               </Box>
             </Stack>
           </Stack>
