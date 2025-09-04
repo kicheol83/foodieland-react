@@ -6,9 +6,7 @@ import Fade from "@material-ui/core/Fade";
 import { Box, Fab, Stack, TextField } from "@mui/material";
 import styled from "styled-components";
 import LoginIcon from "@mui/icons-material/Login";
-import GoogleLoginButton from "../GoogleLoginButton";
 import { T } from "../../../libs/types/common";
-import { Message } from "@mui/icons-material";
 import { Messages } from "../../../libs/config";
 import { LoginInput, MemberInput } from "../../../libs/types/member";
 import MemberService from "../../services/MemberService";
@@ -121,8 +119,6 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
       sweetErrorHandling(err).then();
     }
   };
-
-  const { authMember } = useGlobals();
 
   return (
     <div>
