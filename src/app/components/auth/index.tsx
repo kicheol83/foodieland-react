@@ -138,6 +138,7 @@ export default function AuthenticationModal(props: AuthenticationModalProps) {
           <Stack
             className={classes.paper}
             direction={"row"}
+            justifyContent={"space-around"}
             sx={{ width: "800px" }}
           >
             <ModalImg
